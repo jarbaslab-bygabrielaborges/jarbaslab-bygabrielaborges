@@ -101,55 +101,15 @@ button {
 .logout {
     width: 100%;
     margin-top: 10px;
-    background: #eee;
-    color: #b00020;
-    font-weight: bold;
-}
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-.login-logo {
-    text-align: center;
-    font-size: 60px;
-    margin-bottom: 10px;
-}
-
-.login-titulo {
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.login-subtitulo {
-    text-align: center;
-    color: #777;
-    margin-bottom: 25px;
+    background: #f4eaea;
+    color: #a00000;
 }
 
 .usuario-logado {
-    background: #f4f6f8;
-    border-radius: 10px;
-    padding: 10px 12px;
-    margin-bottom: 15px;
-    font-size: 13px;
-    color: #666;
     text-align: center;
-}
-
-.aviso {
-    color: #b00020;
-    font-weight: bold;
-    margin-top: 15px;
-}
-
-.sucesso {
-    color: #167a35;
-    font-weight: bold;
-    margin-top: 15px;
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 15px;
 }
 
 
@@ -235,13 +195,30 @@ button {
     margin: 20px 0;
 }
 
+.aviso {
+    color: #b00020;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.sucesso {
+    color: #167a35;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+
+/* =====================================================
+   ESCONDER ELEMENTOS
+===================================================== */
+
 .escondido {
     display: none !important;
 }
 
 
 /* =====================================================
-   CONTADOR GRANDE
+   CONTADOR GRANDE EM TELA CHEIA
 ===================================================== */
 
 .contador-tela {
@@ -264,17 +241,23 @@ button {
 }
 
 .contador-topo {
+
     padding: 18px 20px;
+
     text-align: center;
 }
 
 .contador-topo h1 {
+
     font-size: 32px;
+
     margin: 5px 0;
 }
 
 .contador-topo p {
+
     color: #aaa;
+
     margin: 5px 0;
 }
 
@@ -298,24 +281,34 @@ button {
 }
 
 .area-contagem:active {
+
     background: #222;
 }
 
 .contagem-grande {
+
     font-size: 110px;
+
     font-weight: bold;
+
     line-height: 1;
 }
 
 .contagem-label {
+
     font-size: 24px;
+
     color: #aaa;
+
     margin-top: 15px;
 }
 
 .dica {
+
     font-size: 15px;
+
     color: #777;
+
     margin-top: 35px;
 }
 
@@ -331,17 +324,23 @@ button {
 }
 
 .contador-acoes button {
+
     font-size: 18px;
+
     padding: 17px;
 }
 
 .btn-desfazer {
+
     background: #333;
+
     color: white;
 }
 
 .btn-finalizar {
+
     background: white;
+
     color: #111;
 }
 
@@ -391,18 +390,25 @@ button {
 }
 
 .abrir-salvo {
+
     background: #222;
+
     color: white;
 }
 
 .excluir-salvo {
+
     background: #eee;
+
     color: #b00020;
 }
 
 .vazio {
+
     text-align: center;
+
     color: #777;
+
     padding: 20px 0;
 }
 
@@ -418,29 +424,33 @@ button {
 
 
 <!-- =====================================================
-     TELA DE LOGIN
+     TELA INICIAL
 ===================================================== -->
 
-<div id="telaLogin">
+<div id="telaInicial">
 
-    <div class="login-logo">
-        🔬
-    </div>
+    <h1>
+        🔬 Neubauer Cell Counter
+    </h1>
 
-    <div class="login-titulo">
-        Neubauer Cell Counter
-    </div>
-
-    <div class="login-subtitulo">
+    <div class="subtitulo">
         Contagem de células
     </div>
 
 
-    <div class="card">
+    <!-- =================================================
+         LOGIN
+    ================================================== -->
+
+    <div class="card" id="areaLogin">
 
         <h2>
             Acesso
         </h2>
+
+        <div class="informacao">
+            Entre na sua conta para salvar seus experimentos.
+        </div>
 
 
         <label>
@@ -490,35 +500,24 @@ button {
 
     </div>
 
-</div>
 
-
-
-<!-- =====================================================
-     TELA INICIAL / NOVO EXPERIMENTO
-===================================================== -->
-
-<div
-    id="telaInicial"
-    class="escondido"
->
-
-    <h1>
-        🔬 Neubauer Cell Counter
-    </h1>
-
-    <div class="subtitulo">
-        Contagem de células
-    </div>
-
+    <!-- =================================================
+         ÁREA DO USUÁRIO LOGADO
+    ================================================== -->
 
     <div
-        class="usuario-logado"
-        id="usuarioLogado"
-    ></div>
+        class="card escondido"
+        id="areaUsuario"
+    >
 
+        <div class="usuario-logado">
 
-    <div class="card">
+            Usuário conectado:
+
+            <strong id="usuarioEmail"></strong>
+
+        </div>
+
 
         <h2>
             Novo experimento
@@ -582,11 +581,15 @@ button {
             class="logout"
             onclick="sair()"
         >
-            SAIR
+            SAIR DA CONTA
         </button>
 
     </div>
 
+
+    <!-- =================================================
+         LISTA DE EXPERIMENTOS
+    ================================================== -->
 
     <div
         id="listaExperimentos"
@@ -602,7 +605,7 @@ button {
 
         <button
             class="secondary"
-            onclick="fecharExperimentos()"
+            onclick="voltarInicio()"
         >
             VOLTAR
         </button>
@@ -649,6 +652,7 @@ button {
     id="contadorTela"
     class="contador-tela escondido"
 >
+
 
     <div class="contador-topo">
 
@@ -975,7 +979,6 @@ button {
 </div>
 
 
-
 <!-- =====================================================
      SUPABASE
 ===================================================== -->
@@ -990,12 +993,12 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
     "sb_publishable_gAisFOa518ndwmrivbZAqw_WsY9p4oM";
 
+
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_KEY
     );
-
 
 
 /* =====================================================
@@ -1016,6 +1019,8 @@ let numeroTotalCelulas = 0;
 
 let dadosPlaqueamento = null;
 
+let experimentoAtualSalvo = null;
+
 
 
 /* =====================================================
@@ -1030,6 +1035,7 @@ async function entrar() {
             .value
             .trim();
 
+
     const senha =
         document
             .getElementById("senhaLogin")
@@ -1037,8 +1043,9 @@ async function entrar() {
 
 
     const mensagem =
-        document
-            .getElementById("mensagemLogin");
+        document.getElementById(
+            "mensagemLogin"
+        );
 
 
     mensagem.classList.add("escondido");
@@ -1058,44 +1065,33 @@ async function entrar() {
     }
 
 
-    try {
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth.signInWithPassword({
 
-        const { data, error } =
-            await supabaseClient.auth.signInWithPassword({
+            email: email,
 
-                email: email,
+            password: senha
 
-                password: senha
-
-            });
-
-
-        if (error) {
-
-            mostrarMensagemLogin(
-                traduzirErroLogin(error.message)
-            );
-
-            return;
-
-        }
+        });
 
 
-        mostrarAplicativo(
-            data.user
-        );
-
-    }
-
-    catch (erro) {
+    if (error) {
 
         mostrarMensagemLogin(
-            "Não foi possível realizar o login."
+            "E-mail ou senha incorretos."
         );
 
-        console.error(erro);
+        return;
 
     }
+
+
+    mostrarUsuarioLogado(
+        data.user
+    );
 
 }
 
@@ -1112,6 +1108,7 @@ async function criarConta() {
             .getElementById("emailLogin")
             .value
             .trim();
+
 
     const senha =
         document
@@ -1144,63 +1141,49 @@ async function criarConta() {
     }
 
 
-    try {
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth.signUp({
 
-        const { data, error } =
-            await supabaseClient.auth.signUp({
+            email: email,
 
-                email: email,
+            password: senha
 
-                password: senha
-
-            });
-
-
-        if (error) {
-
-            mostrarMensagemLogin(
-                traduzirErroLogin(error.message)
-            );
-
-            return;
-
-        }
+        });
 
 
-        /*
-           Dependendo da configuração do Supabase,
-           pode ser necessário confirmar o e-mail.
-        */
+    if (error) {
 
-        if (
-            data.session &&
-            data.user
-        ) {
+        mostrarMensagemLogin(
+            error.message
+        );
 
-            mostrarAplicativo(
-                data.user
-            );
-
-        }
-
-        else {
-
-            mostrarMensagemLogin(
-                "Conta criada! Verifique seu e-mail para confirmar o cadastro e depois faça o login.",
-                true
-            );
-
-        }
+        return;
 
     }
 
-    catch (erro) {
+
+    if (
+        data.user &&
+        !data.session
+    ) {
 
         mostrarMensagemLogin(
-            "Não foi possível criar a conta."
+            "Conta criada! Verifique seu e-mail para confirmar a conta antes de entrar."
         );
 
-        console.error(erro);
+        return;
+
+    }
+
+
+    if (data.user) {
+
+        mostrarUsuarioLogado(
+            data.user
+        );
 
     }
 
@@ -1209,17 +1192,15 @@ async function criarConta() {
 
 
 /* =====================================================
-   MOSTRAR MENSAGEM DO LOGIN
+   MOSTRAR MENSAGEM DE LOGIN
 ===================================================== */
 
-function mostrarMensagemLogin(
-    texto,
-    sucesso = false
-) {
+function mostrarMensagemLogin(texto) {
 
     const mensagem =
-        document
-            .getElementById("mensagemLogin");
+        document.getElementById(
+            "mensagemLogin"
+        );
 
 
     mensagem.innerText =
@@ -1230,115 +1211,57 @@ function mostrarMensagemLogin(
         "escondido"
     );
 
-
-    mensagem.classList.remove(
-        "sucesso"
-    );
-
-
-    mensagem.classList.remove(
-        "aviso"
-    );
-
-
-    mensagem.classList.add(
-        sucesso
-            ? "sucesso"
-            : "aviso"
-    );
-
 }
 
 
 
 /* =====================================================
-   TRADUZIR ERROS
+   MOSTRAR USUÁRIO LOGADO
 ===================================================== */
 
-function traduzirErroLogin(
-    erro
-) {
+function mostrarUsuarioLogado(user) {
 
-    if (
-        erro.includes(
-            "Invalid login credentials"
+    document
+        .getElementById(
+            "areaLogin"
         )
-    ) {
-
-        return "E-mail ou senha incorretos.";
-
-    }
-
-
-    if (
-        erro.includes(
-            "Email not confirmed"
-        )
-    ) {
-
-        return "Confirme seu e-mail antes de entrar.";
-
-    }
-
-
-    if (
-        erro.includes(
-            "User already registered"
-        )
-    ) {
-
-        return "Este e-mail já possui uma conta.";
-
-    }
-
-
-    if (
-        erro.includes(
-            "Password should be at least"
-        )
-    ) {
-
-        return "A senha precisa ter pelo menos 6 caracteres.";
-
-    }
-
-
-    return erro;
-
-}
-
-
-
-/* =====================================================
-   MOSTRAR APLICATIVO
-===================================================== */
-
-function mostrarAplicativo(
-    usuario
-) {
-
-    esconderTodasAsTelas();
+        .classList
+        .add("escondido");
 
 
     document
-        .getElementById("telaInicial")
+        .getElementById(
+            "areaUsuario"
+        )
         .classList
         .remove("escondido");
 
 
     document
-        .getElementById("listaExperimentos")
+        .getElementById(
+            "usuarioEmail"
+        )
+        .innerText =
+            user.email || "";
+
+
+    esconderTodasAsTelas();
+
+
+    document
+        .getElementById(
+            "telaInicial"
+        )
         .classList
-        .add("escondido");
+        .remove("escondido");
 
 
-    const usuarioLogado =
-        document
-            .getElementById("usuarioLogado");
-
-
-    usuarioLogado.innerText =
-        "👤 " + usuario.email;
+    document
+        .getElementById(
+            "areaUsuario"
+        )
+        .classList
+        .remove("escondido");
 
 }
 
@@ -1353,39 +1276,47 @@ async function sair() {
     await supabaseClient.auth.signOut();
 
 
-    esconderTodasAsTelas();
+    document
+        .getElementById(
+            "areaUsuario"
+        )
+        .classList
+        .add("escondido");
 
 
     document
-        .getElementById("telaLogin")
+        .getElementById(
+            "areaLogin"
+        )
         .classList
         .remove("escondido");
 
 
     document
-        .getElementById("emailLogin")
+        .getElementById(
+            "emailLogin"
+        )
         .value = "";
 
 
     document
-        .getElementById("senhaLogin")
+        .getElementById(
+            "senhaLogin"
+        )
         .value = "";
 
 
-    document
-        .getElementById("mensagemLogin")
-        .classList
-        .add("escondido");
+    novoExperimento();
 
 }
 
 
 
 /* =====================================================
-   VERIFICAR LOGIN AO ABRIR
+   VERIFICAR SESSÃO AO ABRIR
 ===================================================== */
 
-async function verificarLogin() {
+async function verificarSessao() {
 
     const {
         data
@@ -1393,30 +1324,18 @@ async function verificarLogin() {
         await supabaseClient.auth.getSession();
 
 
-    if (
-        data.session &&
-        data.session.user
-    ) {
+    if (data.session) {
 
-        mostrarAplicativo(
+        mostrarUsuarioLogado(
             data.session.user
         );
 
     }
 
-    else {
-
-        esconderTodasAsTelas();
-
-
-        document
-            .getElementById("telaLogin")
-            .classList
-            .remove("escondido");
-
-    }
-
 }
+
+
+verificarSessao();
 
 
 
@@ -1428,7 +1347,9 @@ function formatarVolume(valor) {
 
     if (valor >= 1000) {
 
-        let ml = valor / 1000;
+        let ml =
+            valor / 1000;
+
 
         return ml.toLocaleString(
             "pt-BR",
@@ -1458,37 +1379,41 @@ function formatarVolume(valor) {
 function esconderTodasAsTelas() {
 
     document
-        .getElementById("telaLogin")
+        .getElementById(
+            "telaInicial"
+        )
         .classList
         .add("escondido");
 
 
     document
-        .getElementById("telaInicial")
+        .getElementById(
+            "telaContagem"
+        )
         .classList
         .add("escondido");
 
 
     document
-        .getElementById("telaContagem")
+        .getElementById(
+            "telaResultado"
+        )
         .classList
         .add("escondido");
 
 
     document
-        .getElementById("telaResultado")
+        .getElementById(
+            "telaPlaqueamento"
+        )
         .classList
         .add("escondido");
 
 
     document
-        .getElementById("telaPlaqueamento")
-        .classList
-        .add("escondido");
-
-
-    document
-        .getElementById("telaExperimentoSalvo")
+        .getElementById(
+            "telaExperimentoSalvo"
+        )
         .classList
         .add("escondido");
 
@@ -1504,7 +1429,9 @@ function prosseguir() {
 
     nomeExperimento =
         document
-            .getElementById("nomeExperimento")
+            .getElementById(
+                "nomeExperimento"
+            )
             .value
             .trim();
 
@@ -1512,7 +1439,9 @@ function prosseguir() {
     volumeSuspensao =
         Number(
             document
-                .getElementById("volumeSuspensao")
+                .getElementById(
+                    "volumeSuspensao"
+                )
                 .value
         );
 
@@ -1520,7 +1449,9 @@ function prosseguir() {
     fatorDiluicao =
         Number(
             document
-                .getElementById("fatorDiluicao")
+                .getElementById(
+                    "fatorDiluicao"
+                )
                 .value
         );
 
@@ -1549,7 +1480,9 @@ function prosseguir() {
 
 
     document
-        .getElementById("tituloExperimento")
+        .getElementById(
+            "tituloExperimento"
+        )
         .innerText =
             nomeExperimento;
 
@@ -1561,7 +1494,9 @@ function prosseguir() {
 
 
     document
-        .getElementById("telaContagem")
+        .getElementById(
+            "telaContagem"
+        )
         .classList
         .remove("escondido");
 
@@ -1650,7 +1585,7 @@ function atualizarListaQuadrantes() {
 
             Total:
 
-            <span>
+            <span id="total">
                 ${total}
             </span>
 
@@ -1680,7 +1615,9 @@ function atualizarListaQuadrantes() {
 
 
     document
-        .getElementById("listaQuadrantes")
+        .getElementById(
+            "listaQuadrantes"
+        )
         .innerHTML =
             html;
 
@@ -1699,14 +1636,18 @@ function abrirContador(numero) {
 
 
     document
-        .getElementById("contadorQuadranteTitulo")
+        .getElementById(
+            "contadorQuadranteTitulo"
+        )
         .innerText =
             "Q" +
             (numero + 1);
 
 
     document
-        .getElementById("contadorProgresso")
+        .getElementById(
+            "contadorProgresso"
+        )
         .innerText =
             "Quadrante " +
             (numero + 1) +
@@ -1714,13 +1655,17 @@ function abrirContador(numero) {
 
 
     document
-        .getElementById("contadorGrande")
+        .getElementById(
+            "contadorGrande"
+        )
         .innerText =
             contagens[numero];
 
 
     document
-        .getElementById("contadorTela")
+        .getElementById(
+            "contadorTela"
+        )
         .classList
         .remove("escondido");
 
@@ -1743,7 +1688,9 @@ function registrarToque(event) {
 
 
     document
-        .getElementById("contadorGrande")
+        .getElementById(
+            "contadorGrande"
+        )
         .innerText =
             contagens[
                 quadranteAtual
@@ -1771,7 +1718,9 @@ function desfazerContagem() {
 
 
         document
-            .getElementById("contadorGrande")
+            .getElementById(
+                "contadorGrande"
+            )
             .innerText =
                 contagens[
                     quadranteAtual
@@ -1790,7 +1739,9 @@ function desfazerContagem() {
 function finalizarQuadrante() {
 
     document
-        .getElementById("contadorTela")
+        .getElementById(
+            "contadorTela"
+        )
         .classList
         .add("escondido");
 
@@ -1826,18 +1777,10 @@ function finalizar() {
 
 
     /*
-       OS QUATRO QUADRANTES JUNTOS
-       CORRESPONDEM A 0,4 µL.
-
-       Fator de diluição = 2,
-       por exemplo.
-
-       Portanto:
-
-       células/µL =
-       (total / 0,4)
-       × fator de diluição
+        OS QUATRO QUADRANTES JUNTOS
+        CORRESPONDEM A 0,4 µL.
     */
+
 
     let celulasPorMicrolitro =
 
@@ -1856,13 +1799,17 @@ function finalizar() {
 
 
     document
-        .getElementById("resultadoExperimento")
+        .getElementById(
+            "resultadoExperimento"
+        )
         .innerText =
             nomeExperimento;
 
 
     document
-        .getElementById("resultadoTotal")
+        .getElementById(
+            "resultadoTotal"
+        )
         .innerText =
             total.toLocaleString(
                 "pt-BR"
@@ -1870,7 +1817,9 @@ function finalizar() {
 
 
     document
-        .getElementById("resultadoVolume")
+        .getElementById(
+            "resultadoVolume"
+        )
         .innerText =
             formatarVolume(
                 volumeSuspensao
@@ -1878,7 +1827,9 @@ function finalizar() {
 
 
     document
-        .getElementById("resultadoDiluicao")
+        .getElementById(
+            "resultadoDiluicao"
+        )
         .innerText =
             fatorDiluicao.toLocaleString(
                 "pt-BR"
@@ -1886,7 +1837,9 @@ function finalizar() {
 
 
     document
-        .getElementById("resultadoFinal")
+        .getElementById(
+            "resultadoFinal"
+        )
         .innerText =
             Math.round(
                 numeroTotalCelulas
@@ -1899,7 +1852,9 @@ function finalizar() {
 
 
     document
-        .getElementById("telaResultado")
+        .getElementById(
+            "telaResultado"
+        )
         .classList
         .remove("escondido");
 
@@ -1914,7 +1869,9 @@ function finalizar() {
 function abrirPlaqueamento() {
 
     document
-        .getElementById("celulasDisponiveis")
+        .getElementById(
+            "celulasDisponiveis"
+        )
         .innerText =
             Math.round(
                 numeroTotalCelulas
@@ -1924,7 +1881,9 @@ function abrirPlaqueamento() {
 
 
     document
-        .getElementById("volumeDisponivel")
+        .getElementById(
+            "volumeDisponivel"
+        )
         .innerText =
             formatarVolume(
                 volumeSuspensao
@@ -1932,22 +1891,30 @@ function abrirPlaqueamento() {
 
 
     document
-        .getElementById("numeroPocos")
+        .getElementById(
+            "numeroPocos"
+        )
         .value = "";
 
 
     document
-        .getElementById("celulasPorPoco")
+        .getElementById(
+            "celulasPorPoco"
+        )
         .value = "";
 
 
     document
-        .getElementById("volumePoco")
+        .getElementById(
+            "volumePoco"
+        )
         .value = "";
 
 
     document
-        .getElementById("resultadoPlaqueamento")
+        .getElementById(
+            "resultadoPlaqueamento"
+        )
         .classList
         .add("escondido");
 
@@ -1960,7 +1927,9 @@ function abrirPlaqueamento() {
 
 
     document
-        .getElementById("telaPlaqueamento")
+        .getElementById(
+            "telaPlaqueamento"
+        )
         .classList
         .remove("escondido");
 
@@ -1977,7 +1946,9 @@ function calcularPlaqueamento() {
     let numeroPocos =
         Number(
             document
-                .getElementById("numeroPocos")
+                .getElementById(
+                    "numeroPocos"
+                )
                 .value
         );
 
@@ -1985,14 +1956,18 @@ function calcularPlaqueamento() {
     let celulasPorPoco =
         Number(
             document
-                .getElementById("celulasPorPoco")
+                .getElementById(
+                    "celulasPorPoco"
+                )
                 .value
         );
 
 
     let campoVolume =
         document
-            .getElementById("volumePoco")
+            .getElementById(
+                "volumePoco"
+            )
             .value;
 
 
@@ -2256,13 +2231,17 @@ function calcularPlaqueamento() {
 
 
     document
-        .getElementById("resultadoPlaqueamento")
+        .getElementById(
+            "resultadoPlaqueamento"
+        )
         .innerHTML =
             html;
 
 
     document
-        .getElementById("resultadoPlaqueamento")
+        .getElementById(
+            "resultadoPlaqueamento"
+        )
         .classList
         .remove("escondido");
 
@@ -2271,10 +2250,10 @@ function calcularPlaqueamento() {
 
 
 /* =====================================================
-   SALVAR EXPERIMENTO
+   SALVAR EXPERIMENTO NO SUPABASE
 ===================================================== */
 
-function salvarExperimento() {
+async function salvarExperimento() {
 
     if (
         !dadosPlaqueamento
@@ -2289,45 +2268,46 @@ function salvarExperimento() {
     }
 
 
-    let experimentos =
-
-        JSON.parse(
-            localStorage.getItem(
-                "neubauerExperimentos"
-            )
-        ) || [];
+    const {
+        data: sessionData
+    } =
+        await supabaseClient.auth.getSession();
 
 
-    let agora =
-        new Date();
+    const session =
+        sessionData.session;
 
 
-    let experimento = {
+    if (!session) {
 
-        id:
-            Date.now(),
+        alert(
+            "Sua sessão expirou. Entre novamente na sua conta."
+        );
 
-        nome:
+        return;
+
+    }
+
+
+    const totalContado =
+        contagens[0] +
+        contagens[1] +
+        contagens[2] +
+        contagens[3];
+
+
+    const dados = {
+
+        user_id:
+            session.user.id,
+
+        nome_experimento:
             nomeExperimento,
 
-        data:
-            agora.toLocaleDateString(
-                "pt-BR"
-            ),
-
-        hora:
-            agora.toLocaleTimeString(
-                "pt-BR",
-                {
-                    hour: "2-digit",
-                    minute: "2-digit"
-                }
-            ),
-
-        volumeSuspensao:
+        volume_suspensao:
             volumeSuspensao,
 
-        fatorDiluicao:
+        fator_diluicao:
             fatorDiluicao,
 
         q1:
@@ -2342,36 +2322,62 @@ function salvarExperimento() {
         q4:
             contagens[3],
 
-        totalContado:
-            contagens[0] +
-            contagens[1] +
-            contagens[2] +
-            contagens[3],
-
-        numeroTotalCelulas:
+        total_celulas:
             numeroTotalCelulas,
 
-        plaqueamento:
-            dadosPlaqueamento
+        numero_pocos:
+            dadosPlaqueamento.numeroPocos,
+
+        celulas_por_poco:
+            dadosPlaqueamento.celulasPorPoco,
+
+        volume_poco:
+            dadosPlaqueamento.volumePoco,
+
+        volume_suspensao_por_poco:
+            dadosPlaqueamento.volumeSuspensaoPorPoco,
+
+        volume_meio_por_poco:
+            dadosPlaqueamento.volumeMeioPorPoco
 
     };
 
 
-    experimentos.unshift(
-        experimento
-    );
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("experimentos")
+            .insert(dados)
+            .select()
+            .single();
 
 
-    localStorage.setItem(
-        "neubauerExperimentos",
-        JSON.stringify(
-            experimentos
-        )
-    );
+    if (error) {
+
+        console.error(
+            "Erro ao salvar:",
+            error
+        );
+
+
+        alert(
+            "Não foi possível salvar o experimento.\n\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    experimentoAtualSalvo =
+        data;
 
 
     alert(
-        "✅ Experimento salvo com sucesso!"
+        "✅ Experimento salvo com sucesso na sua conta!"
     );
 
 
@@ -2382,18 +2388,62 @@ function salvarExperimento() {
 
 
 /* =====================================================
-   MOSTRAR EXPERIMENTOS
+   MOSTRAR EXPERIMENTOS DO USUÁRIO
 ===================================================== */
 
-function mostrarExperimentos() {
+async function mostrarExperimentos() {
 
-    let experimentos =
+    const {
+        data: sessionData
+    } =
+        await supabaseClient.auth.getSession();
 
-        JSON.parse(
-            localStorage.getItem(
-                "neubauerExperimentos"
-            )
-        ) || [];
+
+    const session =
+        sessionData.session;
+
+
+    if (!session) {
+
+        alert(
+            "Entre na sua conta primeiro."
+        );
+
+        return;
+
+    }
+
+
+    const {
+        data: experimentos,
+        error
+    } =
+        await supabaseClient
+            .from("experimentos")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+    if (error) {
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            "Erro ao carregar os experimentos.\n\n" +
+            error.message
+        );
+
+        return;
+
+    }
 
 
     let lista =
@@ -2406,6 +2456,7 @@ function mostrarExperimentos() {
 
 
     if (
+        !experimentos ||
         experimentos.length === 0
     ) {
 
@@ -2434,12 +2485,22 @@ function mostrarExperimentos() {
                     "experimento-salvo";
 
 
+                let dataFormatada =
+                    experimento.created_at
+                    ? new Date(
+                        experimento.created_at
+                    ).toLocaleString(
+                        "pt-BR"
+                    )
+                    : "";
+
+
                 div.innerHTML =
 
                     "<h3>" +
 
                     escaparHTML(
-                        experimento.nome
+                        experimento.nome_experimento
                     ) +
 
                     "</h3>" +
@@ -2447,11 +2508,7 @@ function mostrarExperimentos() {
 
                     "<p>" +
 
-                    experimento.data +
-
-                    " às " +
-
-                    experimento.hora +
+                    dataFormatada +
 
                     "</p>" +
 
@@ -2461,8 +2518,9 @@ function mostrarExperimentos() {
                     "Total: " +
 
                     Math.round(
-                        experimento
-                            .numeroTotalCelulas
+                        Number(
+                            experimento.total_celulas
+                        )
                     ).toLocaleString(
                         "pt-BR"
                     ) +
@@ -2477,9 +2535,9 @@ function mostrarExperimentos() {
 
                     '<button ' +
                     'class="abrir-salvo" ' +
-                    'onclick="abrirExperimento(' +
+                    'onclick="abrirExperimento(\'' +
                     experimento.id +
-                    ')">' +
+                    '\')">' +
 
                     "ABRIR" +
 
@@ -2488,9 +2546,9 @@ function mostrarExperimentos() {
 
                     '<button ' +
                     'class="excluir-salvo" ' +
-                    'onclick="excluirExperimento(' +
+                    'onclick="excluirExperimento(\'' +
                     experimento.id +
-                    ')">' +
+                    '\')">' +
 
                     "EXCLUIR" +
 
@@ -2514,13 +2572,17 @@ function mostrarExperimentos() {
 
 
     document
-        .getElementById("telaInicial")
+        .getElementById(
+            "telaInicial"
+        )
         .classList
         .remove("escondido");
 
 
     document
-        .getElementById("listaExperimentos")
+        .getElementById(
+            "listaExperimentos"
+        )
         .classList
         .remove("escondido");
 
@@ -2532,29 +2594,23 @@ function mostrarExperimentos() {
    ABRIR EXPERIMENTO SALVO
 ===================================================== */
 
-function abrirExperimento(id) {
+async function abrirExperimento(id) {
 
-    let experimentos =
-
-        JSON.parse(
-            localStorage.getItem(
-                "neubauerExperimentos"
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("experimentos")
+            .select("*")
+            .eq(
+                "id",
+                id
             )
-        ) || [];
+            .single();
 
 
-    let experimento =
-
-        experimentos.find(
-            function(item) {
-
-                return item.id === id;
-
-            }
-        );
-
-
-    if (!experimento) {
+    if (error || !data) {
 
         alert(
             "Experimento não encontrado."
@@ -2573,7 +2629,7 @@ function abrirExperimento(id) {
         "<h2>" +
 
         escaparHTML(
-            experimento.nome
+            data.nome_experimento
         ) +
 
         "</h2>";
@@ -2583,16 +2639,17 @@ function abrirExperimento(id) {
 
         "<p><strong>Data:</strong> " +
 
-        experimento.data +
-
-        " às " +
-
-        experimento.hora +
+        new Date(
+            data.created_at
+        ).toLocaleString(
+            "pt-BR"
+        ) +
 
         "</p>";
 
 
     html +=
+
         '<div class="linha"></div>';
 
 
@@ -2601,7 +2658,9 @@ function abrirExperimento(id) {
         "<p><strong>Volume da suspensão:</strong> " +
 
         formatarVolume(
-            experimento.volumeSuspensao
+            Number(
+                data.volume_suspensao
+            )
         ) +
 
         "</p>";
@@ -2611,7 +2670,7 @@ function abrirExperimento(id) {
 
         "<p><strong>Fator de diluição:</strong> " +
 
-        experimento.fatorDiluicao +
+        data.fator_diluicao +
 
         "</p>";
 
@@ -2620,7 +2679,7 @@ function abrirExperimento(id) {
 
         "<p><strong>Q1:</strong> " +
 
-        experimento.q1 +
+        data.q1 +
 
         "</p>";
 
@@ -2629,7 +2688,7 @@ function abrirExperimento(id) {
 
         "<p><strong>Q2:</strong> " +
 
-        experimento.q2 +
+        data.q2 +
 
         "</p>";
 
@@ -2638,7 +2697,7 @@ function abrirExperimento(id) {
 
         "<p><strong>Q3:</strong> " +
 
-        experimento.q3 +
+        data.q3 +
 
         "</p>";
 
@@ -2647,7 +2706,7 @@ function abrirExperimento(id) {
 
         "<p><strong>Q4:</strong> " +
 
-        experimento.q4 +
+        data.q4 +
 
         "</p>";
 
@@ -2656,7 +2715,18 @@ function abrirExperimento(id) {
 
         "<p><strong>Total contado:</strong> " +
 
-        experimento.totalContado +
+        Number(
+            data.q1
+        ) +
+        Number(
+            data.q2
+        ) +
+        Number(
+            data.q3
+        ) +
+        Number(
+            data.q4
+        ) +
 
         "</p>";
 
@@ -2680,8 +2750,9 @@ function abrirExperimento(id) {
         '<div class="resultado-numero">' +
 
         Math.round(
-            experimento
-                .numeroTotalCelulas
+            Number(
+                data.total_celulas
+            )
         ).toLocaleString(
             "pt-BR"
         ) +
@@ -2693,110 +2764,90 @@ function abrirExperimento(id) {
         "<div>células</div>";
 
 
+    html +=
+
+        '<div class="linha"></div>';
+
+
+    html +=
+        "<h3>Plaqueamento</h3>";
+
+
+    html +=
+
+        "<p><strong>Poços:</strong> " +
+
+        data.numero_pocos +
+
+        "</p>";
+
+
+    html +=
+
+        "<p><strong>Células por poço:</strong> " +
+
+        Number(
+            data.celulas_por_poco
+        ).toLocaleString(
+            "pt-BR"
+        ) +
+
+        "</p>";
+
+
+    html +=
+
+        "<p><strong>Suspensão por poço:</strong> " +
+
+        formatarVolume(
+            Number(
+                data.volume_suspensao_por_poco
+            )
+        ) +
+
+        "</p>";
+
+
     if (
-        experimento.plaqueamento
+        data.volume_poco !== null &&
+        Number(
+            data.volume_poco
+        ) > 0
     ) {
 
-        let p =
-            experimento.plaqueamento;
-
-
         html +=
 
-            '<div class="linha"></div>';
-
-
-        html +=
-            "<h3>Plaqueamento</h3>";
-
-
-        html +=
-
-            "<p><strong>Poços:</strong> " +
-
-            p.numeroPocos +
-
-            "</p>";
-
-
-        html +=
-
-            "<p><strong>Células por poço:</strong> " +
-
-            p.celulasPorPoco.toLocaleString(
-                "pt-BR"
-            ) +
-
-            "</p>";
-
-
-        html +=
-
-            "<p><strong>Suspensão por poço:</strong> " +
+            "<p><strong>Volume total do poço:</strong> " +
 
             formatarVolume(
-                p.volumeSuspensaoPorPoco
+                Number(
+                    data.volume_poco
+                )
             ) +
 
             "</p>";
 
+    }
+
+
+    if (
+        data.volume_meio_por_poco !== null &&
+        Number(
+            data.volume_meio_por_poco
+        ) >= 0
+    ) {
 
         html +=
 
-            "<p><strong>Suspensão total:</strong> " +
+            "<p><strong>Meio por poço:</strong> " +
 
             formatarVolume(
-                p.volumeSuspensaoTotal
+                Number(
+                    data.volume_meio_por_poco
+                )
             ) +
 
             "</p>";
-
-
-        if (
-            p.volumePoco !== null &&
-            p.volumePoco > 0
-        ) {
-
-            html +=
-
-                "<p><strong>Volume total do poço:</strong> " +
-
-                formatarVolume(
-                    p.volumePoco
-                ) +
-
-                "</p>";
-
-
-            if (
-                p.volumeMeioPorPoco !== null &&
-                p.volumeMeioPorPoco >= 0
-            ) {
-
-                html +=
-
-                    "<p><strong>Meio por poço:</strong> " +
-
-                    formatarVolume(
-                        p.volumeMeioPorPoco
-                    ) +
-
-                    "</p>";
-
-
-                html +=
-
-                    "<p><strong>Meio total:</strong> " +
-
-                    formatarVolume(
-                        p.volumeMeioTotal
-                    ) +
-
-                    "</p>";
-
-            }
-
-        }
 
     }
 
@@ -2827,7 +2878,7 @@ function abrirExperimento(id) {
    EXCLUIR EXPERIMENTO
 ===================================================== */
 
-function excluirExperimento(id) {
+async function excluirExperimento(id) {
 
     let confirmar =
         confirm(
@@ -2842,31 +2893,37 @@ function excluirExperimento(id) {
     }
 
 
-    let experimentos =
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("experimentos")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
 
-        JSON.parse(
-            localStorage.getItem(
-                "neubauerExperimentos"
-            )
-        ) || [];
 
+    if (error) {
 
-    experimentos =
-
-        experimentos.filter(
-            function(item) {
-
-                return item.id !== id;
-
-            }
+        console.error(
+            error
         );
 
 
-    localStorage.setItem(
-        "neubauerExperimentos",
-        JSON.stringify(
-            experimentos
-        )
+        alert(
+            "Não foi possível excluir o experimento.\n\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        "Experimento excluído."
     );
 
 
@@ -2877,15 +2934,36 @@ function excluirExperimento(id) {
 
 
 /* =====================================================
-   FECHAR EXPERIMENTOS
+   VOLTAR PARA INÍCIO
 ===================================================== */
 
-function fecharExperimentos() {
+function voltarInicio() {
 
     document
-        .getElementById("listaExperimentos")
+        .getElementById(
+            "listaExperimentos"
+        )
         .classList
         .add("escondido");
+
+
+    esconderTodasAsTelas();
+
+
+    document
+        .getElementById(
+            "telaInicial"
+        )
+        .classList
+        .remove("escondido");
+
+
+    document
+        .getElementById(
+            "areaUsuario"
+        )
+        .classList
+        .remove("escondido");
 
 }
 
@@ -2901,7 +2979,9 @@ function voltarResultado() {
 
 
     document
-        .getElementById("telaResultado")
+        .getElementById(
+            "telaResultado"
+        )
         .classList
         .remove("escondido");
 
@@ -2944,43 +3024,59 @@ function novoExperimento() {
 
 
     document
-        .getElementById("nomeExperimento")
+        .getElementById(
+            "nomeExperimento"
+        )
         .value = "";
 
 
     document
-        .getElementById("volumeSuspensao")
+        .getElementById(
+            "volumeSuspensao"
+        )
         .value = "";
 
 
     document
-        .getElementById("fatorDiluicao")
+        .getElementById(
+            "fatorDiluicao"
+        )
         .value = "";
 
 
     document
-        .getElementById("numeroPocos")
+        .getElementById(
+            "numeroPocos"
+        )
         .value = "";
 
 
     document
-        .getElementById("celulasPorPoco")
+        .getElementById(
+            "celulasPorPoco"
+        )
         .value = "";
 
 
     document
-        .getElementById("volumePoco")
+        .getElementById(
+            "volumePoco"
+        )
         .value = "";
 
 
     document
-        .getElementById("contadorTela")
+        .getElementById(
+            "contadorTela"
+        )
         .classList
         .add("escondido");
 
 
     document
-        .getElementById("resultadoPlaqueamento")
+        .getElementById(
+            "resultadoPlaqueamento"
+        )
         .classList
         .add("escondido");
 
@@ -2989,16 +3085,53 @@ function novoExperimento() {
 
 
     document
-        .getElementById("telaInicial")
+        .getElementById(
+            "telaInicial"
+        )
         .classList
         .remove("escondido");
+
+
+    /*
+       Se estiver logado,
+       mostrar a área do usuário.
+    */
+
+    supabaseClient.auth
+        .getSession()
+        .then(
+            function(resultado) {
+
+                if (
+                    resultado.data.session
+                ) {
+
+                    document
+                        .getElementById(
+                            "areaLogin"
+                        )
+                        .classList
+                        .add("escondido");
+
+
+                    document
+                        .getElementById(
+                            "areaUsuario"
+                        )
+                        .classList
+                        .remove("escondido");
+
+                }
+
+            }
+        );
 
 }
 
 
 
 /* =====================================================
-   SEGURANÇA PARA NOME
+   SEGURANÇA PARA NOME DO EXPERIMENTO
 ===================================================== */
 
 function escaparHTML(texto) {
@@ -3020,8 +3153,18 @@ function escaparHTML(texto) {
 
 
 /* =====================================================
-   TECLADO
+   TECLADO DO COMPUTADOR
 ===================================================== */
+
+/*
+
+ESPAÇO ou ENTER = contar uma célula
+
+BACKSPACE ou SETA ESQUERDA = desfazer
+
+ESC = finalizar o quadrante
+
+*/
 
 document.addEventListener(
     "keydown",
@@ -3094,26 +3237,16 @@ document.addEventListener(
     }
 );
 
-
-
-/* =====================================================
-   INICIAR APLICAÇÃO
-===================================================== */
-
-verificarLogin();
-
 </script>
 
 
-<footer
-    style="
-        text-align:center;
-        margin-top:30px;
-        padding:15px;
-        font-size:12px;
-        opacity:0.65;
-    "
->
+<footer style="
+    text-align:center;
+    margin-top:30px;
+    padding:15px;
+    font-size:12px;
+    opacity:0.65;
+">
 
     © 2026 Gabriela Ribeiro Borges
 
