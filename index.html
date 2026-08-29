@@ -12,10 +12,6 @@
 
 <style>
 
-/* =====================================================
-   CONFIGURAÇÃO GERAL
-===================================================== */
-
 * {
     box-sizing: border-box;
 }
@@ -101,8 +97,8 @@ button {
 .logout {
     width: 100%;
     margin-top: 10px;
-    background: #f4eaea;
-    color: #a00000;
+    background: #f1f1f1;
+    color: #b00020;
 }
 
 .usuario-logado {
@@ -112,19 +108,12 @@ button {
     margin-bottom: 15px;
 }
 
-
-/* =====================================================
-   QUADRANTES
-===================================================== */
-
 .quadrante {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     border: 1px solid #ddd;
     border-radius: 12px;
-
     padding: 14px;
     margin: 10px 0;
 }
@@ -155,11 +144,6 @@ button {
     font-weight: bold;
     margin-top: 20px;
 }
-
-
-/* =====================================================
-   RESULTADO
-===================================================== */
 
 .resultado {
     text-align: center;
@@ -207,158 +191,96 @@ button {
     margin-top: 15px;
 }
 
-
-/* =====================================================
-   ESCONDER ELEMENTOS
-===================================================== */
-
 .escondido {
     display: none !important;
 }
 
-
-/* =====================================================
-   CONTADOR GRANDE EM TELA CHEIA
-===================================================== */
-
 .contador-tela {
-
     position: fixed;
-
     inset: 0;
-
     background: #111;
-
     color: white;
-
     z-index: 1000;
-
     display: flex;
-
     flex-direction: column;
-
     touch-action: manipulation;
 }
 
 .contador-topo {
-
     padding: 18px 20px;
-
     text-align: center;
 }
 
 .contador-topo h1 {
-
     font-size: 32px;
-
     margin: 5px 0;
 }
 
 .contador-topo p {
-
     color: #aaa;
-
     margin: 5px 0;
 }
 
 .area-contagem {
-
     flex: 1;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     text-align: center;
-
     user-select: none;
-
     -webkit-user-select: none;
-
     cursor: pointer;
 }
 
 .area-contagem:active {
-
     background: #222;
 }
 
 .contagem-grande {
-
     font-size: 110px;
-
     font-weight: bold;
-
     line-height: 1;
 }
 
 .contagem-label {
-
     font-size: 24px;
-
     color: #aaa;
-
     margin-top: 15px;
 }
 
 .dica {
-
     font-size: 15px;
-
     color: #777;
-
     margin-top: 35px;
 }
 
 .contador-acoes {
-
     padding: 18px 20px 25px;
-
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 10px;
 }
 
 .contador-acoes button {
-
     font-size: 18px;
-
     padding: 17px;
 }
 
 .btn-desfazer {
-
     background: #333;
-
     color: white;
 }
 
 .btn-finalizar {
-
     background: white;
-
     color: #111;
 }
 
-
-/* =====================================================
-   EXPERIMENTOS SALVOS
-===================================================== */
-
 .experimento-salvo {
-
     border: 1px solid #ddd;
-
     border-radius: 12px;
-
     padding: 15px;
-
     margin-top: 12px;
-
     background: #fafafa;
 }
 
@@ -372,53 +294,52 @@ button {
 }
 
 .botoes-salvo {
-
     display: flex;
-
     gap: 8px;
-
     margin-top: 12px;
 }
 
 .botoes-salvo button {
-
     flex: 1;
-
     font-size: 14px;
-
     padding: 10px;
 }
 
 .abrir-salvo {
-
     background: #222;
-
     color: white;
 }
 
 .excluir-salvo {
-
     background: #eee;
-
     color: #b00020;
 }
 
 .vazio {
-
     text-align: center;
-
     color: #777;
-
     padding: 20px 0;
+}
+
+.mensagem-login {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.mensagem-login.erro {
+    color: #b00020;
+}
+
+.mensagem-login.ok {
+    color: #167a35;
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <div class="app">
 
@@ -438,20 +359,13 @@ button {
     </div>
 
 
-    <!-- =================================================
-         LOGIN
-    ================================================== -->
+    <!-- LOGIN -->
 
     <div class="card" id="areaLogin">
 
         <h2>
-            Acesso
+            🔐 Acesso
         </h2>
-
-        <div class="informacao">
-            Entre na sua conta para salvar seus experimentos.
-        </div>
-
 
         <label>
             E-mail
@@ -495,120 +409,117 @@ button {
 
         <div
             id="mensagemLogin"
-            class="aviso escondido"
+            class="mensagem-login escondido"
         ></div>
 
     </div>
 
 
-    <!-- =================================================
-         ÁREA DO USUÁRIO LOGADO
-    ================================================== -->
+    <!-- ÁREA DO USUÁRIO -->
 
     <div
-        class="card escondido"
         id="areaUsuario"
+        class="escondido"
     >
 
-        <div class="usuario-logado">
+        <div
+            class="card"
+        >
 
-            Usuário conectado:
+            <div
+                class="usuario-logado"
+                id="usuarioLogado"
+            ></div>
 
-            <strong id="usuarioEmail"></strong>
+
+            <h2>
+                Novo experimento
+            </h2>
+
+
+            <label>
+                Nome do experimento
+            </label>
+
+            <input
+                id="nomeExperimento"
+                type="text"
+                placeholder="Ex.: BV2 - IPA 50 µM"
+            >
+
+
+            <label>
+                Volume da suspensão (µL)
+            </label>
+
+            <input
+                id="volumeSuspensao"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Ex.: 200"
+            >
+
+
+            <label>
+                Fator de diluição
+            </label>
+
+            <input
+                id="fatorDiluicao"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Ex.: 2"
+            >
+
+
+            <button
+                class="prosseguir"
+                onclick="prosseguir()"
+            >
+                PROSSEGUIR
+            </button>
+
+
+            <button
+                class="secondary"
+                onclick="mostrarExperimentos()"
+            >
+                📂 EXPERIMENTOS SALVOS
+            </button>
+
+
+            <button
+                class="logout"
+                onclick="sair()"
+            >
+                SAIR DA CONTA
+            </button>
 
         </div>
 
 
-        <h2>
-            Novo experimento
-        </h2>
-
-
-        <label>
-            Nome do experimento
-        </label>
-
-        <input
-            id="nomeExperimento"
-            type="text"
-            placeholder="Ex.: BV2 - IPA 50 µM"
+        <div
+            id="listaExperimentos"
+            class="card escondido"
         >
 
+            <h2>
+                Experimentos salvos
+            </h2>
 
-        <label>
-            Volume da suspensão (µL)
-        </label>
-
-        <input
-            id="volumeSuspensao"
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="Ex.: 200"
-        >
+            <div id="listaSalvos"></div>
 
 
-        <label>
-            Fator de diluição
-        </label>
+            <button
+                class="secondary"
+                onclick="fecharExperimentos()"
+            >
+                VOLTAR
+            </button>
 
-        <input
-            id="fatorDiluicao"
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="Ex.: 2"
-        >
-
-
-        <button
-            class="prosseguir"
-            onclick="prosseguir()"
-        >
-            PROSSEGUIR
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="mostrarExperimentos()"
-        >
-            📂 EXPERIMENTOS SALVOS
-        </button>
-
-
-        <button
-            class="logout"
-            onclick="sair()"
-        >
-            SAIR DA CONTA
-        </button>
-
-    </div>
-
-
-    <!-- =================================================
-         LISTA DE EXPERIMENTOS
-    ================================================== -->
-
-    <div
-        id="listaExperimentos"
-        class="card escondido"
-    >
-
-        <h2>
-            Experimentos salvos
-        </h2>
-
-        <div id="listaSalvos"></div>
-
-
-        <button
-            class="secondary"
-            onclick="voltarInicio()"
-        >
-            VOLTAR
-        </button>
+        </div>
 
     </div>
 
@@ -652,7 +563,6 @@ button {
     id="contadorTela"
     class="contador-tela escondido"
 >
-
 
     <div class="contador-topo">
 
@@ -835,7 +745,6 @@ button {
 
     <div class="card">
 
-
         <h2>
             Dados para o plaqueamento
         </h2>
@@ -987,8 +896,10 @@ button {
 
 <script>
 
+
 const SUPABASE_URL =
     "https://kqdauctjaisymizdjuzf.supabase.co";
+
 
 const SUPABASE_KEY =
     "sb_publishable_gAisFOa518ndwmrivbZAqw_WsY9p4oM";
@@ -1001,118 +912,84 @@ const supabaseClient =
     );
 
 
+
 /* =====================================================
    VARIÁVEIS
 ===================================================== */
 
-let contagens = [0, 0, 0, 0];
+let contagens =
+    [0, 0, 0, 0];
 
-let quadranteAtual = 0;
+let quadranteAtual =
+    0;
 
-let volumeSuspensao = 0;
+let volumeSuspensao =
+    0;
 
-let fatorDiluicao = 1;
+let fatorDiluicao =
+    1;
 
-let nomeExperimento = "";
+let nomeExperimento =
+    "";
 
-let numeroTotalCelulas = 0;
+let numeroTotalCelulas =
+    0;
 
-let dadosPlaqueamento = null;
+let dadosPlaqueamento =
+    null;
 
-let experimentoAtualSalvo = null;
+let usuarioAtual =
+    null;
 
 
 
 /* =====================================================
-   LOGIN
+   LOGIN / CADASTRO
 ===================================================== */
 
-async function entrar() {
+function mostrarMensagemLogin(
+    mensagem,
+    tipo = "erro"
+) {
 
-    const email =
-        document
-            .getElementById("emailLogin")
-            .value
-            .trim();
-
-
-    const senha =
-        document
-            .getElementById("senhaLogin")
-            .value;
-
-
-    const mensagem =
+    const elemento =
         document.getElementById(
             "mensagemLogin"
         );
 
+    elemento.innerText =
+        mensagem;
 
-    mensagem.classList.add("escondido");
+    elemento.classList.remove(
+        "escondido",
+        "erro",
+        "ok"
+    );
 
-
-    if (
-        email === "" ||
-        senha === ""
-    ) {
-
-        mostrarMensagemLogin(
-            "Digite seu e-mail e sua senha."
-        );
-
-        return;
-
-    }
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.auth.signInWithPassword({
-
-            email: email,
-
-            password: senha
-
-        });
-
-
-    if (error) {
-
-        mostrarMensagemLogin(
-            "E-mail ou senha incorretos."
-        );
-
-        return;
-
-    }
-
-
-    mostrarUsuarioLogado(
-        data.user
+    elemento.classList.add(
+        tipo
     );
 
 }
 
 
 
-/* =====================================================
-   CRIAR CONTA
-===================================================== */
-
 async function criarConta() {
 
     const email =
         document
-            .getElementById("emailLogin")
+            .getElementById(
+                "emailLogin"
+            )
             .value
             .trim();
 
 
     const senha =
         document
-            .getElementById("senhaLogin")
+            .getElementById(
+                "senhaLogin"
+            )
             .value;
 
 
@@ -1122,7 +999,7 @@ async function criarConta() {
     ) {
 
         mostrarMensagemLogin(
-            "Digite um e-mail e uma senha para criar sua conta."
+            "Informe o e-mail e a senha."
         );
 
         return;
@@ -1133,7 +1010,7 @@ async function criarConta() {
     if (senha.length < 6) {
 
         mostrarMensagemLogin(
-            "A senha precisa ter pelo menos 6 caracteres."
+            "A senha deve ter pelo menos 6 caracteres."
         );
 
         return;
@@ -1141,22 +1018,28 @@ async function criarConta() {
     }
 
 
+    mostrarMensagemLogin(
+        "Criando sua conta...",
+        "ok"
+    );
+
+
     const {
         data,
         error
     } =
-        await supabaseClient.auth.signUp({
-
-            email: email,
-
-            password: senha
-
-        });
+        await supabaseClient
+            .auth
+            .signUp({
+                email: email,
+                password: senha
+            });
 
 
     if (error) {
 
         mostrarMensagemLogin(
+            "Erro ao criar conta: " +
             error.message
         );
 
@@ -1166,12 +1049,54 @@ async function criarConta() {
 
 
     if (
-        data.user &&
-        !data.session
+        data.session
+    ) {
+
+        usuarioAtual =
+            data.user;
+
+        entrarNaAreaDoUsuario();
+
+        return;
+
+    }
+
+
+    mostrarMensagemLogin(
+        "Conta criada! Verifique seu e-mail para confirmar o cadastro.",
+        "ok"
+    );
+
+}
+
+
+
+async function entrar() {
+
+    const email =
+        document
+            .getElementById(
+                "emailLogin"
+            )
+            .value
+            .trim();
+
+
+    const senha =
+        document
+            .getElementById(
+                "senhaLogin"
+            )
+            .value;
+
+
+    if (
+        email === "" ||
+        senha === ""
     ) {
 
         mostrarMensagemLogin(
-            "Conta criada! Verifique seu e-mail para confirmar a conta antes de entrar."
+            "Informe o e-mail e a senha."
         );
 
         return;
@@ -1179,101 +1104,121 @@ async function criarConta() {
     }
 
 
-    if (data.user) {
+    mostrarMensagemLogin(
+        "Entrando...",
+        "ok"
+    );
 
-        mostrarUsuarioLogado(
-            data.user
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .auth
+            .signInWithPassword({
+                email: email,
+                password: senha
+            });
+
+
+    if (error) {
+
+        mostrarMensagemLogin(
+            "E-mail ou senha incorretos."
         );
+
+        console.error(error);
+
+        return;
 
     }
 
+
+    usuarioAtual =
+        data.user;
+
+
+    entrarNaAreaDoUsuario();
+
 }
 
 
 
-/* =====================================================
-   MOSTRAR MENSAGEM DE LOGIN
-===================================================== */
+function entrarNaAreaDoUsuario() {
 
-function mostrarMensagemLogin(texto) {
-
-    const mensagem =
-        document.getElementById(
-            "mensagemLogin"
+    document
+        .getElementById(
+            "areaLogin"
+        )
+        .classList
+        .add(
+            "escondido"
         );
 
 
-    mensagem.innerText =
-        texto;
-
-
-    mensagem.classList.remove(
-        "escondido"
-    );
-
-}
-
-
-
-/* =====================================================
-   MOSTRAR USUÁRIO LOGADO
-===================================================== */
-
-function mostrarUsuarioLogado(user) {
-
-    document
-        .getElementById(
-            "areaLogin"
-        )
-        .classList
-        .add("escondido");
-
-
     document
         .getElementById(
             "areaUsuario"
         )
         .classList
-        .remove("escondido");
+        .remove(
+            "escondido"
+        );
 
 
     document
         .getElementById(
-            "usuarioEmail"
+            "usuarioLogado"
         )
         .innerText =
-            user.email || "";
+            "Usuário: " +
+            usuarioAtual.email;
 
 
-    esconderTodasAsTelas();
-
-
-    document
-        .getElementById(
-            "telaInicial"
-        )
-        .classList
-        .remove("escondido");
+    mostrarMensagemLogin(
+        ""
+    );
 
 
     document
         .getElementById(
-            "areaUsuario"
+            "mensagemLogin"
         )
         .classList
-        .remove("escondido");
+        .add(
+            "escondido"
+        );
 
 }
 
 
-
-/* =====================================================
-   SAIR
-===================================================== */
 
 async function sair() {
 
-    await supabaseClient.auth.signOut();
+    const {
+        error
+    } =
+        await supabaseClient
+            .auth
+            .signOut();
+
+
+    if (error) {
+
+        alert(
+            "Erro ao sair da conta."
+        );
+
+        console.error(error);
+
+        return;
+
+    }
+
+
+    usuarioAtual =
+        null;
 
 
     document
@@ -1281,7 +1226,9 @@ async function sair() {
             "areaUsuario"
         )
         .classList
-        .add("escondido");
+        .add(
+            "escondido"
+        );
 
 
     document
@@ -1289,7 +1236,9 @@ async function sair() {
             "areaLogin"
         )
         .classList
-        .remove("escondido");
+        .remove(
+            "escondido"
+        );
 
 
     document
@@ -1313,7 +1262,7 @@ async function sair() {
 
 
 /* =====================================================
-   VERIFICAR SESSÃO AO ABRIR
+   VERIFICAR LOGIN AO ABRIR
 ===================================================== */
 
 async function verificarSessao() {
@@ -1321,14 +1270,19 @@ async function verificarSessao() {
     const {
         data
     } =
-        await supabaseClient.auth.getSession();
+        await supabaseClient
+            .auth
+            .getSession();
 
 
-    if (data.session) {
+    if (
+        data.session
+    ) {
 
-        mostrarUsuarioLogado(
-            data.session.user
-        );
+        usuarioAtual =
+            data.session.user;
+
+        entrarNaAreaDoUsuario();
 
     }
 
@@ -1345,7 +1299,9 @@ verificarSessao();
 
 function formatarVolume(valor) {
 
-    if (valor >= 1000) {
+    if (
+        valor >= 1000
+    ) {
 
         let ml =
             valor / 1000;
@@ -1383,7 +1339,9 @@ function esconderTodasAsTelas() {
             "telaInicial"
         )
         .classList
-        .add("escondido");
+        .add(
+            "escondido"
+        );
 
 
     document
@@ -1391,7 +1349,9 @@ function esconderTodasAsTelas() {
             "telaContagem"
         )
         .classList
-        .add("escondido");
+        .add(
+            "escondido"
+        );
 
 
     document
@@ -1399,7 +1359,9 @@ function esconderTodasAsTelas() {
             "telaResultado"
         )
         .classList
-        .add("escondido");
+        .add(
+            "escondido"
+        );
 
 
     document
@@ -1407,7 +1369,9 @@ function esconderTodasAsTelas() {
             "telaPlaqueamento"
         )
         .classList
-        .add("escondido");
+        .add(
+            "escondido"
+        );
 
 
     document
@@ -1415,7 +1379,9 @@ function esconderTodasAsTelas() {
             "telaExperimentoSalvo"
         )
         .classList
-        .add("escondido");
+        .add(
+            "escondido"
+        );
 
 }
 
@@ -1498,7 +1464,9 @@ function prosseguir() {
             "telaContagem"
         )
         .classList
-        .remove("escondido");
+        .remove(
+            "escondido"
+        );
 
 }
 
@@ -1510,7 +1478,8 @@ function prosseguir() {
 
 function atualizarListaQuadrantes() {
 
-    let html = "";
+    let html =
+        "";
 
 
     for (
@@ -1667,7 +1636,9 @@ function abrirContador(numero) {
             "contadorTela"
         )
         .classList
-        .remove("escondido");
+        .remove(
+            "escondido"
+        );
 
 }
 
@@ -1743,7 +1714,9 @@ function finalizarQuadrante() {
             "contadorTela"
         )
         .classList
-        .add("escondido");
+        .add(
+            "escondido"
+        );
 
 
     atualizarListaQuadrantes();
@@ -1765,7 +1738,9 @@ function finalizar() {
         contagens[3];
 
 
-    if (total <= 0) {
+    if (
+        total <= 0
+    ) {
 
         alert(
             "Nenhuma célula foi contada."
@@ -1856,7 +1831,9 @@ function finalizar() {
             "telaResultado"
         )
         .classList
-        .remove("escondido");
+        .remove(
+            "escondido"
+        );
 
 }
 
@@ -1916,7 +1893,9 @@ function abrirPlaqueamento() {
             "resultadoPlaqueamento"
         )
         .classList
-        .add("escondido");
+        .add(
+            "escondido"
+        );
 
 
     dadosPlaqueamento =
@@ -1931,7 +1910,9 @@ function abrirPlaqueamento() {
             "telaPlaqueamento"
         )
         .classList
-        .remove("escondido");
+        .remove(
+            "escondido"
+        );
 
 }
 
@@ -2035,7 +2016,8 @@ function calcularPlaqueamento() {
     };
 
 
-    let html = "";
+    let html =
+        "";
 
 
     html +=
@@ -2068,9 +2050,7 @@ function calcularPlaqueamento() {
     html +=
 
         "<div>" +
-
         "Suspensão de células por poço" +
-
         "</div>";
 
 
@@ -2088,9 +2068,7 @@ function calcularPlaqueamento() {
     html +=
 
         "<div>" +
-
         "Volume total de suspensão" +
-
         "</div>";
 
 
@@ -2173,9 +2151,7 @@ function calcularPlaqueamento() {
             html +=
 
                 "<div>" +
-
                 "Meio de cultura por poço" +
-
                 "</div>";
 
 
@@ -2193,9 +2169,7 @@ function calcularPlaqueamento() {
             html +=
 
                 "<div>" +
-
                 "Volume total de meio" +
-
                 "</div>";
 
 
@@ -2243,17 +2217,32 @@ function calcularPlaqueamento() {
             "resultadoPlaqueamento"
         )
         .classList
-        .remove("escondido");
+        .remove(
+            "escondido"
+        );
 
 }
 
 
 
 /* =====================================================
-   SALVAR EXPERIMENTO NO SUPABASE
+   SALVAR NO SUPABASE
 ===================================================== */
 
 async function salvarExperimento() {
+
+    if (
+        !usuarioAtual
+    ) {
+
+        alert(
+            "Você precisa estar conectado para salvar o experimento."
+        );
+
+        return;
+
+    }
+
 
     if (
         !dadosPlaqueamento
@@ -2268,28 +2257,8 @@ async function salvarExperimento() {
     }
 
 
-    const {
-        data: sessionData
-    } =
-        await supabaseClient.auth.getSession();
-
-
-    const session =
-        sessionData.session;
-
-
-    if (!session) {
-
-        alert(
-            "Sua sessão expirou. Entre novamente na sua conta."
-        );
-
-        return;
-
-    }
-
-
     const totalContado =
+
         contagens[0] +
         contagens[1] +
         contagens[2] +
@@ -2299,7 +2268,7 @@ async function salvarExperimento() {
     const dados = {
 
         user_id:
-            session.user.id,
+            usuarioAtual.id,
 
         nome_experimento:
             nomeExperimento,
@@ -2348,10 +2317,13 @@ async function salvarExperimento() {
         error
     } =
         await supabaseClient
-            .from("experimentos")
-            .insert(dados)
-            .select()
-            .single();
+            .from(
+                "experimentos"
+            )
+            .insert(
+                dados
+            )
+            .select();
 
 
     if (error) {
@@ -2363,7 +2335,7 @@ async function salvarExperimento() {
 
 
         alert(
-            "Não foi possível salvar o experimento.\n\n" +
+            "Erro ao salvar o experimento:\n\n" +
             error.message
         );
 
@@ -2372,12 +2344,8 @@ async function salvarExperimento() {
     }
 
 
-    experimentoAtualSalvo =
-        data;
-
-
     alert(
-        "✅ Experimento salvo com sucesso na sua conta!"
+        "✅ Experimento salvo com sucesso!"
     );
 
 
@@ -2393,21 +2361,9 @@ async function salvarExperimento() {
 
 async function mostrarExperimentos() {
 
-    const {
-        data: sessionData
-    } =
-        await supabaseClient.auth.getSession();
-
-
-    const session =
-        sessionData.session;
-
-
-    if (!session) {
-
-        alert(
-            "Entre na sua conta primeiro."
-        );
+    if (
+        !usuarioAtual
+    ) {
 
         return;
 
@@ -2415,12 +2371,18 @@ async function mostrarExperimentos() {
 
 
     const {
-        data: experimentos,
+        data,
         error
     } =
         await supabaseClient
-            .from("experimentos")
+            .from(
+                "experimentos"
+            )
             .select("*")
+            .eq(
+                "user_id",
+                usuarioAtual.id
+            )
             .order(
                 "created_at",
                 {
@@ -2437,7 +2399,7 @@ async function mostrarExperimentos() {
 
 
         alert(
-            "Erro ao carregar os experimentos.\n\n" +
+            "Erro ao carregar os experimentos:\n\n" +
             error.message
         );
 
@@ -2452,12 +2414,13 @@ async function mostrarExperimentos() {
         );
 
 
-    lista.innerHTML = "";
+    lista.innerHTML =
+        "";
 
 
     if (
-        !experimentos ||
-        experimentos.length === 0
+        !data ||
+        data.length === 0
     ) {
 
         lista.innerHTML =
@@ -2472,7 +2435,7 @@ async function mostrarExperimentos() {
 
     else {
 
-        experimentos.forEach(
+        data.forEach(
             function(experimento) {
 
                 let div =
@@ -2485,14 +2448,12 @@ async function mostrarExperimentos() {
                     "experimento-salvo";
 
 
-                let dataFormatada =
-                    experimento.created_at
-                    ? new Date(
+                const dataFormatada =
+                    new Date(
                         experimento.created_at
                     ).toLocaleString(
                         "pt-BR"
-                    )
-                    : "";
+                    );
 
 
                 div.innerHTML =
@@ -2576,7 +2537,29 @@ async function mostrarExperimentos() {
             "telaInicial"
         )
         .classList
-        .remove("escondido");
+        .remove(
+            "escondido"
+        );
+
+
+    document
+        .getElementById(
+            "areaUsuario"
+        )
+        .classList
+        .remove(
+            "escondido"
+        );
+
+
+    document
+        .getElementById(
+            "areaLogin"
+        )
+        .classList
+        .add(
+            "escondido"
+        );
 
 
     document
@@ -2584,14 +2567,16 @@ async function mostrarExperimentos() {
             "listaExperimentos"
         )
         .classList
-        .remove("escondido");
+        .remove(
+            "escondido"
+        );
 
 }
 
 
 
 /* =====================================================
-   ABRIR EXPERIMENTO SALVO
+   ABRIR EXPERIMENTO
 ===================================================== */
 
 async function abrirExperimento(id) {
@@ -2601,11 +2586,17 @@ async function abrirExperimento(id) {
         error
     } =
         await supabaseClient
-            .from("experimentos")
+            .from(
+                "experimentos"
+            )
             .select("*")
             .eq(
                 "id",
                 id
+            )
+            .eq(
+                "user_id",
+                usuarioAtual.id
             )
             .single();
 
@@ -2621,7 +2612,8 @@ async function abrirExperimento(id) {
     }
 
 
-    let html = "";
+    let html =
+        "";
 
 
     html +=
@@ -2649,7 +2641,6 @@ async function abrirExperimento(id) {
 
 
     html +=
-
         '<div class="linha"></div>';
 
 
@@ -2678,36 +2669,28 @@ async function abrirExperimento(id) {
     html +=
 
         "<p><strong>Q1:</strong> " +
-
         data.q1 +
-
         "</p>";
 
 
     html +=
 
         "<p><strong>Q2:</strong> " +
-
         data.q2 +
-
         "</p>";
 
 
     html +=
 
         "<p><strong>Q3:</strong> " +
-
         data.q3 +
-
         "</p>";
 
 
     html +=
 
         "<p><strong>Q4:</strong> " +
-
         data.q4 +
-
         "</p>";
 
 
@@ -2715,17 +2698,11 @@ async function abrirExperimento(id) {
 
         "<p><strong>Total contado:</strong> " +
 
-        Number(
-            data.q1
-        ) +
-        Number(
-            data.q2
-        ) +
-        Number(
-            data.q3
-        ) +
-        Number(
-            data.q4
+        (
+            Number(data.q1) +
+            Number(data.q2) +
+            Number(data.q3) +
+            Number(data.q4)
         ) +
 
         "</p>";
@@ -2739,9 +2716,7 @@ async function abrirExperimento(id) {
     html +=
 
         "<h3>" +
-
         "Número de células na suspensão" +
-
         "</h3>";
 
 
@@ -2808,6 +2783,25 @@ async function abrirExperimento(id) {
         "</p>";
 
 
+    html +=
+
+        "<p><strong>Suspensão total:</strong> " +
+
+        formatarVolume(
+
+            Number(
+                data.volume_suspensao_por_poco
+            )
+            *
+            Number(
+                data.numero_pocos
+            )
+
+        ) +
+
+        "</p>";
+
+
     if (
         data.volume_poco !== null &&
         Number(
@@ -2849,6 +2843,25 @@ async function abrirExperimento(id) {
 
             "</p>";
 
+
+        html +=
+
+            "<p><strong>Meio total:</strong> " +
+
+            formatarVolume(
+
+                Number(
+                    data.volume_meio_por_poco
+                )
+                *
+                Number(
+                    data.numero_pocos
+                )
+
+            ) +
+
+            "</p>";
+
     }
 
 
@@ -2868,7 +2881,9 @@ async function abrirExperimento(id) {
             "telaExperimentoSalvo"
         )
         .classList
-        .remove("escondido");
+        .remove(
+            "escondido"
+        );
 
 }
 
@@ -2886,7 +2901,9 @@ async function excluirExperimento(id) {
         );
 
 
-    if (!confirmar) {
+    if (
+        !confirmar
+    ) {
 
         return;
 
@@ -2897,11 +2914,17 @@ async function excluirExperimento(id) {
         error
     } =
         await supabaseClient
-            .from("experimentos")
+            .from(
+                "experimentos"
+            )
             .delete()
             .eq(
                 "id",
                 id
+            )
+            .eq(
+                "user_id",
+                usuarioAtual.id
             );
 
 
@@ -2913,7 +2936,7 @@ async function excluirExperimento(id) {
 
 
         alert(
-            "Não foi possível excluir o experimento.\n\n" +
+            "Erro ao excluir o experimento:\n\n" +
             error.message
         );
 
@@ -2934,36 +2957,19 @@ async function excluirExperimento(id) {
 
 
 /* =====================================================
-   VOLTAR PARA INÍCIO
+   FECHAR EXPERIMENTOS
 ===================================================== */
 
-function voltarInicio() {
+function fecharExperimentos() {
 
     document
         .getElementById(
             "listaExperimentos"
         )
         .classList
-        .add("escondido");
-
-
-    esconderTodasAsTelas();
-
-
-    document
-        .getElementById(
-            "telaInicial"
-        )
-        .classList
-        .remove("escondido");
-
-
-    document
-        .getElementById(
-            "areaUsuario"
-        )
-        .classList
-        .remove("escondido");
+        .add(
+            "escondido"
+        );
 
 }
 
@@ -2983,7 +2989,9 @@ function voltarResultado() {
             "telaResultado"
         )
         .classList
-        .remove("escondido");
+        .remove(
+            "escondido"
+        );
 
 }
 
@@ -3070,7 +3078,9 @@ function novoExperimento() {
             "contadorTela"
         )
         .classList
-        .add("escondido");
+        .add(
+            "escondido"
+        );
 
 
     document
@@ -3078,7 +3088,19 @@ function novoExperimento() {
             "resultadoPlaqueamento"
         )
         .classList
-        .add("escondido");
+        .add(
+            "escondido"
+        );
+
+
+    document
+        .getElementById(
+            "listaExperimentos"
+        )
+        .classList
+        .add(
+            "escondido"
+        );
 
 
     esconderTodasAsTelas();
@@ -3089,49 +3111,42 @@ function novoExperimento() {
             "telaInicial"
         )
         .classList
-        .remove("escondido");
-
-
-    /*
-       Se estiver logado,
-       mostrar a área do usuário.
-    */
-
-    supabaseClient.auth
-        .getSession()
-        .then(
-            function(resultado) {
-
-                if (
-                    resultado.data.session
-                ) {
-
-                    document
-                        .getElementById(
-                            "areaLogin"
-                        )
-                        .classList
-                        .add("escondido");
-
-
-                    document
-                        .getElementById(
-                            "areaUsuario"
-                        )
-                        .classList
-                        .remove("escondido");
-
-                }
-
-            }
+        .remove(
+            "escondido"
         );
+
+
+    if (
+        usuarioAtual
+    ) {
+
+        document
+            .getElementById(
+                "areaLogin"
+            )
+            .classList
+            .add(
+                "escondido"
+            );
+
+
+        document
+            .getElementById(
+                "areaUsuario"
+            )
+            .classList
+            .remove(
+                "escondido"
+            );
+
+    }
 
 }
 
 
 
 /* =====================================================
-   SEGURANÇA PARA NOME DO EXPERIMENTO
+   SEGURANÇA
 ===================================================== */
 
 function escaparHTML(texto) {
@@ -3153,18 +3168,8 @@ function escaparHTML(texto) {
 
 
 /* =====================================================
-   TECLADO DO COMPUTADOR
+   TECLADO
 ===================================================== */
-
-/*
-
-ESPAÇO ou ENTER = contar uma célula
-
-BACKSPACE ou SETA ESQUERDA = desfazer
-
-ESC = finalizar o quadrante
-
-*/
 
 document.addEventListener(
     "keydown",
@@ -3182,7 +3187,9 @@ document.addEventListener(
                 );
 
 
-        if (!contadorAberto) {
+        if (
+            !contadorAberto
+        ) {
 
             return;
 
@@ -3240,13 +3247,9 @@ document.addEventListener(
 </script>
 
 
-<footer style="
-    text-align:center;
-    margin-top:30px;
-    padding:15px;
-    font-size:12px;
-    opacity:0.65;
-">
+<footer
+    style="text-align:center; margin-top:30px; padding:15px; font-size:12px; opacity:0.65;"
+>
 
     © 2026 Gabriela Ribeiro Borges
 
