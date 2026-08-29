@@ -79,7 +79,7 @@ button {
 .finalizar,
 .plaquear,
 .calcular-plaqueamento,
-.salvar {
+.enviar-email {
     width: 100%;
     margin-top: 20px;
     background: #222;
@@ -92,20 +92,6 @@ button {
     margin-top: 10px;
     background: #eee;
     color: #222;
-}
-
-.logout {
-    width: 100%;
-    margin-top: 10px;
-    background: #f1f1f1;
-    color: #b00020;
-}
-
-.usuario-logado {
-    text-align: center;
-    color: #666;
-    font-size: 13px;
-    margin-bottom: 15px;
 }
 
 .quadrante {
@@ -195,6 +181,8 @@ button {
     display: none !important;
 }
 
+/* CONTADOR */
+
 .contador-tela {
     position: fixed;
     inset: 0;
@@ -276,63 +264,32 @@ button {
     color: #111;
 }
 
-.experimento-salvo {
-    border: 1px solid #ddd;
+/* E-MAIL */
+
+.email-card {
+    margin-top: 20px;
+    padding: 18px;
     border-radius: 12px;
-    padding: 15px;
+    background: #f4f6f8;
+    text-align: left;
+}
+
+.email-card h3 {
+    margin-top: 0;
+}
+
+.email-mensagem {
     margin-top: 12px;
-    background: #fafafa;
-}
-
-.experimento-salvo h3 {
-    margin: 0 0 8px;
-}
-
-.experimento-salvo p {
-    margin: 5px 0;
-    color: #666;
-}
-
-.botoes-salvo {
-    display: flex;
-    gap: 8px;
-    margin-top: 12px;
-}
-
-.botoes-salvo button {
-    flex: 1;
-    font-size: 14px;
-    padding: 10px;
-}
-
-.abrir-salvo {
-    background: #222;
-    color: white;
-}
-
-.excluir-salvo {
-    background: #eee;
-    color: #b00020;
-}
-
-.vazio {
-    text-align: center;
-    color: #777;
-    padding: 20px 0;
-}
-
-.mensagem-login {
-    margin-top: 15px;
     text-align: center;
     font-weight: bold;
 }
 
-.mensagem-login.erro {
-    color: #b00020;
+.email-mensagem.ok {
+    color: #167a35;
 }
 
-.mensagem-login.ok {
-    color: #167a35;
+.email-mensagem.erro {
+    color: #b00020;
 }
 
 </style>
@@ -359,172 +316,60 @@ button {
     </div>
 
 
-    <!-- LOGIN -->
-
-    <div class="card" id="areaLogin">
+    <div class="card">
 
         <h2>
-            🔐 Acesso
+            Novo experimento
         </h2>
 
+
         <label>
-            E-mail
+            Nome do experimento
         </label>
 
         <input
-            id="emailLogin"
-            type="email"
-            placeholder="Digite seu e-mail"
-            autocomplete="email"
+            id="nomeExperimento"
+            type="text"
+            placeholder="Ex.: BV2 - IPA 50 µM"
         >
 
 
         <label>
-            Senha
+            Volume da suspensão (µL)
         </label>
 
         <input
-            id="senhaLogin"
-            type="password"
-            placeholder="Digite sua senha"
-            autocomplete="current-password"
+            id="volumeSuspensao"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="Ex.: 200"
+        >
+
+
+        <label>
+            Fator de diluição
+        </label>
+
+        <input
+            id="fatorDiluicao"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="Ex.: 2"
         >
 
 
         <button
             class="prosseguir"
-            onclick="entrar()"
+            onclick="prosseguir()"
         >
-            ENTRAR
+            PROSSEGUIR
         </button>
-
-
-        <button
-            class="secondary"
-            onclick="criarConta()"
-        >
-            CRIAR CONTA
-        </button>
-
-
-        <div
-            id="mensagemLogin"
-            class="mensagem-login escondido"
-        ></div>
-
-    </div>
-
-
-    <!-- ÁREA DO USUÁRIO -->
-
-    <div
-        id="areaUsuario"
-        class="escondido"
-    >
-
-        <div
-            class="card"
-        >
-
-            <div
-                class="usuario-logado"
-                id="usuarioLogado"
-            ></div>
-
-
-            <h2>
-                Novo experimento
-            </h2>
-
-
-            <label>
-                Nome do experimento
-            </label>
-
-            <input
-                id="nomeExperimento"
-                type="text"
-                placeholder="Ex.: BV2 - IPA 50 µM"
-            >
-
-
-            <label>
-                Volume da suspensão (µL)
-            </label>
-
-            <input
-                id="volumeSuspensao"
-                type="number"
-                min="0"
-                step="0.01"
-                placeholder="Ex.: 200"
-            >
-
-
-            <label>
-                Fator de diluição
-            </label>
-
-            <input
-                id="fatorDiluicao"
-                type="number"
-                min="0"
-                step="0.01"
-                placeholder="Ex.: 2"
-            >
-
-
-            <button
-                class="prosseguir"
-                onclick="prosseguir()"
-            >
-                PROSSEGUIR
-            </button>
-
-
-            <button
-                class="secondary"
-                onclick="mostrarExperimentos()"
-            >
-                📂 EXPERIMENTOS SALVOS
-            </button>
-
-
-            <button
-                class="logout"
-                onclick="sair()"
-            >
-                SAIR DA CONTA
-            </button>
-
-        </div>
-
-
-        <div
-            id="listaExperimentos"
-            class="card escondido"
-        >
-
-            <h2>
-                Experimentos salvos
-            </h2>
-
-            <div id="listaSalvos"></div>
-
-
-            <button
-                class="secondary"
-                onclick="fecharExperimentos()"
-            >
-                VOLTAR
-            </button>
-
-        </div>
 
     </div>
 
 </div>
-
 
 
 <!-- =====================================================
@@ -554,7 +399,6 @@ button {
 </div>
 
 
-
 <!-- =====================================================
      CONTADOR GRANDE
 ===================================================== -->
@@ -571,7 +415,6 @@ button {
         >
             Q1
         </h1>
-
 
         <p
             id="contadorProgresso"
@@ -596,11 +439,9 @@ button {
                 0
             </div>
 
-
             <div class="contagem-label">
                 células
             </div>
-
 
             <p class="dica">
                 Toque na tela para contar
@@ -633,7 +474,6 @@ button {
 </div>
 
 
-
 <!-- =====================================================
      TELA DE RESULTADO
 ===================================================== -->
@@ -649,7 +489,6 @@ button {
 
 
     <div class="card resultado">
-
 
         <h2
             id="resultadoExperimento"
@@ -716,6 +555,39 @@ button {
         </button>
 
 
+        <!-- ENVIO POR E-MAIL -->
+
+        <div class="email-card">
+
+            <h3>
+                📧 Enviar experimento por e-mail
+            </h3>
+
+            <label>
+                E-mail
+            </label>
+
+            <input
+                id="emailEnvioResultado"
+                type="email"
+                placeholder="exemplo@email.com"
+            >
+
+            <button
+                class="enviar-email"
+                onclick="enviarExperimentoPorEmail()"
+            >
+                📧 ENVIAR EXPERIMENTO
+            </button>
+
+            <div
+                id="mensagemEmailResultado"
+                class="email-mensagem"
+            ></div>
+
+        </div>
+
+
         <button
             class="secondary"
             onclick="novoExperimento()"
@@ -726,7 +598,6 @@ button {
     </div>
 
 </div>
-
 
 
 <!-- =====================================================
@@ -846,71 +717,10 @@ button {
 </div>
 
 
-
-<!-- =====================================================
-     EXPERIMENTO SALVO
-===================================================== -->
-
-<div
-    id="telaExperimentoSalvo"
-    class="escondido"
->
-
-    <h1>
-        📋 Experimento
-    </h1>
-
-
-    <div
-        class="card"
-        id="detalhesExperimentoSalvo"
-    ></div>
-
-
-    <button
-        class="secondary"
-        onclick="mostrarExperimentos()"
-    >
-        VOLTAR PARA EXPERIMENTOS
-    </button>
-
-
-    <button
-        class="secondary"
-        onclick="novoExperimento()"
-    >
-        NOVO EXPERIMENTO
-    </button>
-
 </div>
 
-
-</div>
-
-
-<!-- =====================================================
-     SUPABASE
-===================================================== -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
-
-const SUPABASE_URL =
-    "https://kqdauctjaisymizdjuzf.supabase.co";
-
-
-const SUPABASE_KEY =
-    "sb_publishable_gAisFOa518ndwmrivbZAqw_WsY9p4oM";
-
-
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-
 
 
 /* =====================================================
@@ -938,360 +748,6 @@ let numeroTotalCelulas =
 let dadosPlaqueamento =
     null;
 
-let usuarioAtual =
-    null;
-
-
-
-/* =====================================================
-   LOGIN / CADASTRO
-===================================================== */
-
-function mostrarMensagemLogin(
-    mensagem,
-    tipo = "erro"
-) {
-
-    const elemento =
-        document.getElementById(
-            "mensagemLogin"
-        );
-
-    elemento.innerText =
-        mensagem;
-
-    elemento.classList.remove(
-        "escondido",
-        "erro",
-        "ok"
-    );
-
-    elemento.classList.add(
-        tipo
-    );
-
-}
-
-
-
-async function criarConta() {
-
-    const email =
-        document
-            .getElementById(
-                "emailLogin"
-            )
-            .value
-            .trim();
-
-
-    const senha =
-        document
-            .getElementById(
-                "senhaLogin"
-            )
-            .value;
-
-
-    if (
-        email === "" ||
-        senha === ""
-    ) {
-
-        mostrarMensagemLogin(
-            "Informe o e-mail e a senha."
-        );
-
-        return;
-
-    }
-
-
-    if (senha.length < 6) {
-
-        mostrarMensagemLogin(
-            "A senha deve ter pelo menos 6 caracteres."
-        );
-
-        return;
-
-    }
-
-
-    mostrarMensagemLogin(
-        "Criando sua conta...",
-        "ok"
-    );
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .auth
-            .signUp({
-                email: email,
-                password: senha
-            });
-
-
-    if (error) {
-
-        mostrarMensagemLogin(
-            "Erro ao criar conta: " +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    if (
-        data.session
-    ) {
-
-        usuarioAtual =
-            data.user;
-
-        entrarNaAreaDoUsuario();
-
-        return;
-
-    }
-
-
-    mostrarMensagemLogin(
-        "Conta criada! Verifique seu e-mail para confirmar o cadastro.",
-        "ok"
-    );
-
-}
-
-
-
-async function entrar() {
-
-    const email =
-        document
-            .getElementById(
-                "emailLogin"
-            )
-            .value
-            .trim();
-
-
-    const senha =
-        document
-            .getElementById(
-                "senhaLogin"
-            )
-            .value;
-
-
-    if (
-        email === "" ||
-        senha === ""
-    ) {
-
-        mostrarMensagemLogin(
-            "Informe o e-mail e a senha."
-        );
-
-        return;
-
-    }
-
-
-    mostrarMensagemLogin(
-        "Entrando...",
-        "ok"
-    );
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .auth
-            .signInWithPassword({
-                email: email,
-                password: senha
-            });
-
-
-    if (error) {
-
-        mostrarMensagemLogin(
-            "E-mail ou senha incorretos."
-        );
-
-        console.error(error);
-
-        return;
-
-    }
-
-
-    usuarioAtual =
-        data.user;
-
-
-    entrarNaAreaDoUsuario();
-
-}
-
-
-
-function entrarNaAreaDoUsuario() {
-
-    document
-        .getElementById(
-            "areaLogin"
-        )
-        .classList
-        .add(
-            "escondido"
-        );
-
-
-    document
-        .getElementById(
-            "areaUsuario"
-        )
-        .classList
-        .remove(
-            "escondido"
-        );
-
-
-    document
-        .getElementById(
-            "usuarioLogado"
-        )
-        .innerText =
-            "Usuário: " +
-            usuarioAtual.email;
-
-
-    mostrarMensagemLogin(
-        ""
-    );
-
-
-    document
-        .getElementById(
-            "mensagemLogin"
-        )
-        .classList
-        .add(
-            "escondido"
-        );
-
-}
-
-
-
-async function sair() {
-
-    const {
-        error
-    } =
-        await supabaseClient
-            .auth
-            .signOut();
-
-
-    if (error) {
-
-        alert(
-            "Erro ao sair da conta."
-        );
-
-        console.error(error);
-
-        return;
-
-    }
-
-
-    usuarioAtual =
-        null;
-
-
-    document
-        .getElementById(
-            "areaUsuario"
-        )
-        .classList
-        .add(
-            "escondido"
-        );
-
-
-    document
-        .getElementById(
-            "areaLogin"
-        )
-        .classList
-        .remove(
-            "escondido"
-        );
-
-
-    document
-        .getElementById(
-            "emailLogin"
-        )
-        .value = "";
-
-
-    document
-        .getElementById(
-            "senhaLogin"
-        )
-        .value = "";
-
-
-    novoExperimento();
-
-}
-
-
-
-/* =====================================================
-   VERIFICAR LOGIN AO ABRIR
-===================================================== */
-
-async function verificarSessao() {
-
-    const {
-        data
-    } =
-        await supabaseClient
-            .auth
-            .getSession();
-
-
-    if (
-        data.session
-    ) {
-
-        usuarioAtual =
-            data.session.user;
-
-        entrarNaAreaDoUsuario();
-
-    }
-
-}
-
-
-verificarSessao();
-
-
 
 /* =====================================================
    FORMATAR VOLUME
@@ -1306,7 +762,6 @@ function formatarVolume(valor) {
         let ml =
             valor / 1000;
 
-
         return ml.toLocaleString(
             "pt-BR",
             {
@@ -1315,7 +770,6 @@ function formatarVolume(valor) {
         ) + " mL";
 
     }
-
 
     return valor.toLocaleString(
         "pt-BR",
@@ -1327,7 +781,6 @@ function formatarVolume(valor) {
 }
 
 
-
 /* =====================================================
    ESCONDER TELAS
 ===================================================== */
@@ -1335,56 +788,26 @@ function formatarVolume(valor) {
 function esconderTodasAsTelas() {
 
     document
-        .getElementById(
-            "telaInicial"
-        )
+        .getElementById("telaInicial")
         .classList
-        .add(
-            "escondido"
-        );
-
+        .add("escondido");
 
     document
-        .getElementById(
-            "telaContagem"
-        )
+        .getElementById("telaContagem")
         .classList
-        .add(
-            "escondido"
-        );
-
+        .add("escondido");
 
     document
-        .getElementById(
-            "telaResultado"
-        )
+        .getElementById("telaResultado")
         .classList
-        .add(
-            "escondido"
-        );
-
+        .add("escondido");
 
     document
-        .getElementById(
-            "telaPlaqueamento"
-        )
+        .getElementById("telaPlaqueamento")
         .classList
-        .add(
-            "escondido"
-        );
-
-
-    document
-        .getElementById(
-            "telaExperimentoSalvo"
-        )
-        .classList
-        .add(
-            "escondido"
-        );
+        .add("escondido");
 
 }
-
 
 
 /* =====================================================
@@ -1395,29 +818,21 @@ function prosseguir() {
 
     nomeExperimento =
         document
-            .getElementById(
-                "nomeExperimento"
-            )
+            .getElementById("nomeExperimento")
             .value
             .trim();
-
 
     volumeSuspensao =
         Number(
             document
-                .getElementById(
-                    "volumeSuspensao"
-                )
+                .getElementById("volumeSuspensao")
                 .value
         );
-
 
     fatorDiluicao =
         Number(
             document
-                .getElementById(
-                    "fatorDiluicao"
-                )
+                .getElementById("fatorDiluicao")
                 .value
         );
 
@@ -1440,15 +855,12 @@ function prosseguir() {
     contagens =
         [0, 0, 0, 0];
 
-
     dadosPlaqueamento =
         null;
 
 
     document
-        .getElementById(
-            "tituloExperimento"
-        )
+        .getElementById("tituloExperimento")
         .innerText =
             nomeExperimento;
 
@@ -1460,16 +872,11 @@ function prosseguir() {
 
 
     document
-        .getElementById(
-            "telaContagem"
-        )
+        .getElementById("telaContagem")
         .classList
-        .remove(
-            "escondido"
-        );
+        .remove("escondido");
 
 }
-
 
 
 /* =====================================================
@@ -1554,7 +961,7 @@ function atualizarListaQuadrantes() {
 
             Total:
 
-            <span id="total">
+            <span>
                 ${total}
             </span>
 
@@ -1584,14 +991,11 @@ function atualizarListaQuadrantes() {
 
 
     document
-        .getElementById(
-            "listaQuadrantes"
-        )
+        .getElementById("listaQuadrantes")
         .innerHTML =
             html;
 
 }
-
 
 
 /* =====================================================
@@ -1605,18 +1009,14 @@ function abrirContador(numero) {
 
 
     document
-        .getElementById(
-            "contadorQuadranteTitulo"
-        )
+        .getElementById("contadorQuadranteTitulo")
         .innerText =
             "Q" +
             (numero + 1);
 
 
     document
-        .getElementById(
-            "contadorProgresso"
-        )
+        .getElementById("contadorProgresso")
         .innerText =
             "Quadrante " +
             (numero + 1) +
@@ -1624,24 +1024,17 @@ function abrirContador(numero) {
 
 
     document
-        .getElementById(
-            "contadorGrande"
-        )
+        .getElementById("contadorGrande")
         .innerText =
             contagens[numero];
 
 
     document
-        .getElementById(
-            "contadorTela"
-        )
+        .getElementById("contadorTela")
         .classList
-        .remove(
-            "escondido"
-        );
+        .remove("escondido");
 
 }
-
 
 
 /* =====================================================
@@ -1659,16 +1052,13 @@ function registrarToque(event) {
 
 
     document
-        .getElementById(
-            "contadorGrande"
-        )
+        .getElementById("contadorGrande")
         .innerText =
             contagens[
                 quadranteAtual
             ];
 
 }
-
 
 
 /* =====================================================
@@ -1689,9 +1079,7 @@ function desfazerContagem() {
 
 
         document
-            .getElementById(
-                "contadorGrande"
-            )
+            .getElementById("contadorGrande")
             .innerText =
                 contagens[
                     quadranteAtual
@@ -1702,7 +1090,6 @@ function desfazerContagem() {
 }
 
 
-
 /* =====================================================
    FINALIZAR QUADRANTE
 ===================================================== */
@@ -1710,19 +1097,14 @@ function desfazerContagem() {
 function finalizarQuadrante() {
 
     document
-        .getElementById(
-            "contadorTela"
-        )
+        .getElementById("contadorTela")
         .classList
-        .add(
-            "escondido"
-        );
+        .add("escondido");
 
 
     atualizarListaQuadrantes();
 
 }
-
 
 
 /* =====================================================
@@ -1774,17 +1156,13 @@ function finalizar() {
 
 
     document
-        .getElementById(
-            "resultadoExperimento"
-        )
+        .getElementById("resultadoExperimento")
         .innerText =
             nomeExperimento;
 
 
     document
-        .getElementById(
-            "resultadoTotal"
-        )
+        .getElementById("resultadoTotal")
         .innerText =
             total.toLocaleString(
                 "pt-BR"
@@ -1792,9 +1170,7 @@ function finalizar() {
 
 
     document
-        .getElementById(
-            "resultadoVolume"
-        )
+        .getElementById("resultadoVolume")
         .innerText =
             formatarVolume(
                 volumeSuspensao
@@ -1802,9 +1178,7 @@ function finalizar() {
 
 
     document
-        .getElementById(
-            "resultadoDiluicao"
-        )
+        .getElementById("resultadoDiluicao")
         .innerText =
             fatorDiluicao.toLocaleString(
                 "pt-BR"
@@ -1812,9 +1186,7 @@ function finalizar() {
 
 
     document
-        .getElementById(
-            "resultadoFinal"
-        )
+        .getElementById("resultadoFinal")
         .innerText =
             Math.round(
                 numeroTotalCelulas
@@ -1827,16 +1199,11 @@ function finalizar() {
 
 
     document
-        .getElementById(
-            "telaResultado"
-        )
+        .getElementById("telaResultado")
         .classList
-        .remove(
-            "escondido"
-        );
+        .remove("escondido");
 
 }
-
 
 
 /* =====================================================
@@ -1846,9 +1213,7 @@ function finalizar() {
 function abrirPlaqueamento() {
 
     document
-        .getElementById(
-            "celulasDisponiveis"
-        )
+        .getElementById("celulasDisponiveis")
         .innerText =
             Math.round(
                 numeroTotalCelulas
@@ -1858,9 +1223,7 @@ function abrirPlaqueamento() {
 
 
     document
-        .getElementById(
-            "volumeDisponivel"
-        )
+        .getElementById("volumeDisponivel")
         .innerText =
             formatarVolume(
                 volumeSuspensao
@@ -1868,34 +1231,24 @@ function abrirPlaqueamento() {
 
 
     document
-        .getElementById(
-            "numeroPocos"
-        )
+        .getElementById("numeroPocos")
         .value = "";
 
 
     document
-        .getElementById(
-            "celulasPorPoco"
-        )
+        .getElementById("celulasPorPoco")
         .value = "";
 
 
     document
-        .getElementById(
-            "volumePoco"
-        )
+        .getElementById("volumePoco")
         .value = "";
 
 
     document
-        .getElementById(
-            "resultadoPlaqueamento"
-        )
+        .getElementById("resultadoPlaqueamento")
         .classList
-        .add(
-            "escondido"
-        );
+        .add("escondido");
 
 
     dadosPlaqueamento =
@@ -1906,16 +1259,11 @@ function abrirPlaqueamento() {
 
 
     document
-        .getElementById(
-            "telaPlaqueamento"
-        )
+        .getElementById("telaPlaqueamento")
         .classList
-        .remove(
-            "escondido"
-        );
+        .remove("escondido");
 
 }
-
 
 
 /* =====================================================
@@ -1927,9 +1275,7 @@ function calcularPlaqueamento() {
     let numeroPocos =
         Number(
             document
-                .getElementById(
-                    "numeroPocos"
-                )
+                .getElementById("numeroPocos")
                 .value
         );
 
@@ -1937,18 +1283,14 @@ function calcularPlaqueamento() {
     let celulasPorPoco =
         Number(
             document
-                .getElementById(
-                    "celulasPorPoco"
-                )
+                .getElementById("celulasPorPoco")
                 .value
         );
 
 
     let campoVolume =
         document
-            .getElementById(
-                "volumePoco"
-            )
+            .getElementById("volumePoco")
             .value;
 
 
@@ -2195,69 +1537,43 @@ function calcularPlaqueamento() {
 
     html +=
 
-        '<button ' +
-        'class="salvar" ' +
-        'onclick="salvarExperimento()">' +
+        "<div>" +
+        "O experimento está pronto para ser enviado por e-mail." +
+        "</div>";
 
-        "💾 SALVAR EXPERIMENTO" +
+
+    html +=
+
+        '<button ' +
+        'class="enviar-email" ' +
+        'onclick="enviarExperimentoPorEmail()">' +
+
+        "📧 ENVIAR EXPERIMENTO POR E-MAIL" +
 
         "</button>";
 
 
     document
-        .getElementById(
-            "resultadoPlaqueamento"
-        )
+        .getElementById("resultadoPlaqueamento")
         .innerHTML =
             html;
 
 
     document
-        .getElementById(
-            "resultadoPlaqueamento"
-        )
+        .getElementById("resultadoPlaqueamento")
         .classList
-        .remove(
-            "escondido"
-        );
+        .remove("escondido");
 
 }
 
 
-
 /* =====================================================
-   SALVAR NO SUPABASE
+   GERAR TEXTO DO EXPERIMENTO
 ===================================================== */
 
-async function salvarExperimento() {
+function gerarTextoExperimento() {
 
-    if (
-        !usuarioAtual
-    ) {
-
-        alert(
-            "Você precisa estar conectado para salvar o experimento."
-        );
-
-        return;
-
-    }
-
-
-    if (
-        !dadosPlaqueamento
-    ) {
-
-        alert(
-            "Calcule o plaqueamento antes de salvar."
-        );
-
-        return;
-
-    }
-
-
-    const totalContado =
+    let totalContado =
 
         contagens[0] +
         contagens[1] +
@@ -2265,679 +1581,240 @@ async function salvarExperimento() {
         contagens[3];
 
 
-    const dados = {
-
-        user_id:
-            usuarioAtual.id,
-
-        nome_experimento:
-            nomeExperimento,
-
-        volume_suspensao:
-            volumeSuspensao,
-
-        fator_diluicao:
-            fatorDiluicao,
-
-        q1:
-            contagens[0],
-
-        q2:
-            contagens[1],
-
-        q3:
-            contagens[2],
-
-        q4:
-            contagens[3],
-
-        total_celulas:
-            numeroTotalCelulas,
-
-        numero_pocos:
-            dadosPlaqueamento.numeroPocos,
-
-        celulas_por_poco:
-            dadosPlaqueamento.celulasPorPoco,
-
-        volume_poco:
-            dadosPlaqueamento.volumePoco,
-
-        volume_suspensao_por_poco:
-            dadosPlaqueamento.volumeSuspensaoPorPoco,
-
-        volume_meio_por_poco:
-            dadosPlaqueamento.volumeMeioPorPoco
-
-    };
+    let texto = "";
 
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from(
-                "experimentos"
-            )
-            .insert(
-                dados
-            )
-            .select();
+    texto +=
+        "NEUBAUER CELL COUNTER\n";
+
+    texto +=
+        "==============================\n\n";
 
 
-    if (error) {
+    texto +=
+        "EXPERIMENTO\n";
 
-        console.error(
-            "Erro ao salvar:",
-            error
-        );
+    texto +=
+        "Nome: " +
+        nomeExperimento +
+        "\n";
 
 
-        alert(
-            "Erro ao salvar o experimento:\n\n" +
-            error.message
-        );
+    texto +=
+        "Data: " +
+        new Date().toLocaleString(
+            "pt-BR"
+        ) +
+        "\n\n";
 
-        return;
+
+    texto +=
+        "CONTAGEM\n";
+
+    texto +=
+        "Q1: " +
+        contagens[0] +
+        "\n";
+
+
+    texto +=
+        "Q2: " +
+        contagens[1] +
+        "\n";
+
+
+    texto +=
+        "Q3: " +
+        contagens[2] +
+        "\n";
+
+
+    texto +=
+        "Q4: " +
+        contagens[3] +
+        "\n";
+
+
+    texto +=
+        "Total contado: " +
+        totalContado +
+        "\n\n";
+
+
+    texto +=
+        "DADOS DA SUSPENSÃO\n";
+
+
+    texto +=
+        "Volume da suspensão: " +
+        formatarVolume(volumeSuspensao) +
+        "\n";
+
+
+    texto +=
+        "Fator de diluição: " +
+        fatorDiluicao +
+        "\n";
+
+
+    texto +=
+        "Número de células na suspensão: " +
+        Math.round(numeroTotalCelulas).toLocaleString(
+            "pt-BR"
+        ) +
+        "\n\n";
+
+
+    if (
+        dadosPlaqueamento
+    ) {
+
+        texto +=
+            "PLAQUEAMENTO\n";
+
+
+        texto +=
+            "Número de poços: " +
+            dadosPlaqueamento.numeroPocos +
+            "\n";
+
+
+        texto +=
+            "Células por poço: " +
+            dadosPlaqueamento.celulasPorPoco.toLocaleString(
+                "pt-BR"
+            ) +
+            "\n";
+
+
+        texto +=
+            "Suspensão por poço: " +
+            formatarVolume(
+                dadosPlaqueamento.volumeSuspensaoPorPoco
+            ) +
+            "\n";
+
+
+        texto +=
+            "Suspensão total: " +
+            formatarVolume(
+                dadosPlaqueamento.volumeSuspensaoTotal
+            ) +
+            "\n";
+
+
+        if (
+            dadosPlaqueamento.volumePoco !== null
+        ) {
+
+            texto +=
+                "Volume total do poço: " +
+                formatarVolume(
+                    dadosPlaqueamento.volumePoco
+                ) +
+                "\n";
+
+        }
+
+
+        if (
+            dadosPlaqueamento.volumeMeioPorPoco !== null &&
+            dadosPlaqueamento.volumeMeioPorPoco >= 0
+        ) {
+
+            texto +=
+                "Meio por poço: " +
+                formatarVolume(
+                    dadosPlaqueamento.volumeMeioPorPoco
+                ) +
+                "\n";
+
+
+            texto +=
+                "Meio total: " +
+                formatarVolume(
+                    dadosPlaqueamento.volumeMeioTotal
+                ) +
+                "\n";
+
+        }
 
     }
 
 
-    alert(
-        "✅ Experimento salvo com sucesso!"
-    );
+    texto +=
+        "\n==============================\n";
+
+    texto +=
+        "Gerado pelo Neubauer Cell Counter\n";
 
 
-    mostrarExperimentos();
+    return texto;
 
 }
 
 
-
 /* =====================================================
-   MOSTRAR EXPERIMENTOS DO USUÁRIO
+   ENVIAR EXPERIMENTO POR E-MAIL
 ===================================================== */
 
-async function mostrarExperimentos() {
+function enviarExperimentoPorEmail() {
 
-    if (
-        !usuarioAtual
-    ) {
-
-        return;
-
-    }
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from(
-                "experimentos"
-            )
-            .select("*")
-            .eq(
-                "user_id",
-                usuarioAtual.id
-            )
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
-
-
-    if (error) {
-
-        console.error(
-            error
-        );
-
-
-        alert(
-            "Erro ao carregar os experimentos:\n\n" +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    let lista =
+    let campoEmail =
         document.getElementById(
-            "listaSalvos"
+            "emailEnvioResultado"
         );
 
 
-    lista.innerHTML =
-        "";
+    let email = "";
 
 
     if (
-        !data ||
-        data.length === 0
+        campoEmail
     ) {
 
-        lista.innerHTML =
-
-            '<div class="vazio">' +
-
-            "Nenhum experimento salvo ainda." +
-
-            "</div>";
-
-    }
-
-    else {
-
-        data.forEach(
-            function(experimento) {
-
-                let div =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                div.className =
-                    "experimento-salvo";
-
-
-                const dataFormatada =
-                    new Date(
-                        experimento.created_at
-                    ).toLocaleString(
-                        "pt-BR"
-                    );
-
-
-                div.innerHTML =
-
-                    "<h3>" +
-
-                    escaparHTML(
-                        experimento.nome_experimento
-                    ) +
-
-                    "</h3>" +
-
-
-                    "<p>" +
-
-                    dataFormatada +
-
-                    "</p>" +
-
-
-                    "<p>" +
-
-                    "Total: " +
-
-                    Math.round(
-                        Number(
-                            experimento.total_celulas
-                        )
-                    ).toLocaleString(
-                        "pt-BR"
-                    ) +
-
-                    " células" +
-
-                    "</p>" +
-
-
-                    '<div class="botoes-salvo">' +
-
-
-                    '<button ' +
-                    'class="abrir-salvo" ' +
-                    'onclick="abrirExperimento(\'' +
-                    experimento.id +
-                    '\')">' +
-
-                    "ABRIR" +
-
-                    "</button>" +
-
-
-                    '<button ' +
-                    'class="excluir-salvo" ' +
-                    'onclick="excluirExperimento(\'' +
-                    experimento.id +
-                    '\')">' +
-
-                    "EXCLUIR" +
-
-                    "</button>" +
-
-
-                    "</div>";
-
-
-                lista.appendChild(
-                    div
-                );
-
-            }
-        );
-
-    }
-
-
-    esconderTodasAsTelas();
-
-
-    document
-        .getElementById(
-            "telaInicial"
-        )
-        .classList
-        .remove(
-            "escondido"
-        );
-
-
-    document
-        .getElementById(
-            "areaUsuario"
-        )
-        .classList
-        .remove(
-            "escondido"
-        );
-
-
-    document
-        .getElementById(
-            "areaLogin"
-        )
-        .classList
-        .add(
-            "escondido"
-        );
-
-
-    document
-        .getElementById(
-            "listaExperimentos"
-        )
-        .classList
-        .remove(
-            "escondido"
-        );
-
-}
-
-
-
-/* =====================================================
-   ABRIR EXPERIMENTO
-===================================================== */
-
-async function abrirExperimento(id) {
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from(
-                "experimentos"
-            )
-            .select("*")
-            .eq(
-                "id",
-                id
-            )
-            .eq(
-                "user_id",
-                usuarioAtual.id
-            )
-            .single();
-
-
-    if (error || !data) {
-
-        alert(
-            "Experimento não encontrado."
-        );
-
-        return;
-
-    }
-
-
-    let html =
-        "";
-
-
-    html +=
-
-        "<h2>" +
-
-        escaparHTML(
-            data.nome_experimento
-        ) +
-
-        "</h2>";
-
-
-    html +=
-
-        "<p><strong>Data:</strong> " +
-
-        new Date(
-            data.created_at
-        ).toLocaleString(
-            "pt-BR"
-        ) +
-
-        "</p>";
-
-
-    html +=
-        '<div class="linha"></div>';
-
-
-    html +=
-
-        "<p><strong>Volume da suspensão:</strong> " +
-
-        formatarVolume(
-            Number(
-                data.volume_suspensao
-            )
-        ) +
-
-        "</p>";
-
-
-    html +=
-
-        "<p><strong>Fator de diluição:</strong> " +
-
-        data.fator_diluicao +
-
-        "</p>";
-
-
-    html +=
-
-        "<p><strong>Q1:</strong> " +
-        data.q1 +
-        "</p>";
-
-
-    html +=
-
-        "<p><strong>Q2:</strong> " +
-        data.q2 +
-        "</p>";
-
-
-    html +=
-
-        "<p><strong>Q3:</strong> " +
-        data.q3 +
-        "</p>";
-
-
-    html +=
-
-        "<p><strong>Q4:</strong> " +
-        data.q4 +
-        "</p>";
-
-
-    html +=
-
-        "<p><strong>Total contado:</strong> " +
-
-        (
-            Number(data.q1) +
-            Number(data.q2) +
-            Number(data.q3) +
-            Number(data.q4)
-        ) +
-
-        "</p>";
-
-
-    html +=
-
-        '<div class="linha"></div>';
-
-
-    html +=
-
-        "<h3>" +
-        "Número de células na suspensão" +
-        "</h3>";
-
-
-    html +=
-
-        '<div class="resultado-numero">' +
-
-        Math.round(
-            Number(
-                data.total_celulas
-            )
-        ).toLocaleString(
-            "pt-BR"
-        ) +
-
-        "</div>";
-
-
-    html +=
-        "<div>células</div>";
-
-
-    html +=
-
-        '<div class="linha"></div>';
-
-
-    html +=
-        "<h3>Plaqueamento</h3>";
-
-
-    html +=
-
-        "<p><strong>Poços:</strong> " +
-
-        data.numero_pocos +
-
-        "</p>";
-
-
-    html +=
-
-        "<p><strong>Células por poço:</strong> " +
-
-        Number(
-            data.celulas_por_poco
-        ).toLocaleString(
-            "pt-BR"
-        ) +
-
-        "</p>";
-
-
-    html +=
-
-        "<p><strong>Suspensão por poço:</strong> " +
-
-        formatarVolume(
-            Number(
-                data.volume_suspensao_por_poco
-            )
-        ) +
-
-        "</p>";
-
-
-    html +=
-
-        "<p><strong>Suspensão total:</strong> " +
-
-        formatarVolume(
-
-            Number(
-                data.volume_suspensao_por_poco
-            )
-            *
-            Number(
-                data.numero_pocos
-            )
-
-        ) +
-
-        "</p>";
-
-
-    if (
-        data.volume_poco !== null &&
-        Number(
-            data.volume_poco
-        ) > 0
-    ) {
-
-        html +=
-
-            "<p><strong>Volume total do poço:</strong> " +
-
-            formatarVolume(
-                Number(
-                    data.volume_poco
-                )
-            ) +
-
-            "</p>";
+        email =
+            campoEmail.value.trim();
 
     }
 
 
     if (
-        data.volume_meio_por_poco !== null &&
-        Number(
-            data.volume_meio_por_poco
-        ) >= 0
+        email === ""
     ) {
 
-        html +=
-
-            "<p><strong>Meio por poço:</strong> " +
-
-            formatarVolume(
-                Number(
-                    data.volume_meio_por_poco
-                )
-            ) +
-
-            "</p>";
-
-
-        html +=
-
-            "<p><strong>Meio total:</strong> " +
-
-            formatarVolume(
-
-                Number(
-                    data.volume_meio_por_poco
-                )
-                *
-                Number(
-                    data.numero_pocos
-                )
-
-            ) +
-
-            "</p>";
-
-    }
-
-
-    document
-        .getElementById(
-            "detalhesExperimentoSalvo"
-        )
-        .innerHTML =
-            html;
-
-
-    esconderTodasAsTelas();
-
-
-    document
-        .getElementById(
-            "telaExperimentoSalvo"
-        )
-        .classList
-        .remove(
-            "escondido"
-        );
-
-}
-
-
-
-/* =====================================================
-   EXCLUIR EXPERIMENTO
-===================================================== */
-
-async function excluirExperimento(id) {
-
-    let confirmar =
-        confirm(
-            "Tem certeza que deseja excluir este experimento?"
-        );
-
-
-    if (
-        !confirmar
-    ) {
-
-        return;
-
-    }
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-            .from(
-                "experimentos"
-            )
-            .delete()
-            .eq(
-                "id",
-                id
-            )
-            .eq(
-                "user_id",
-                usuarioAtual.id
+        email =
+            prompt(
+                "Digite o e-mail para enviar o experimento:"
             );
 
+        if (
+            email
+        ) {
 
-    if (error) {
+            email =
+                email.trim();
 
-        console.error(
-            error
-        );
+        }
 
+    }
+
+
+    if (
+        !email
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    ) {
 
         alert(
-            "Erro ao excluir o experimento:\n\n" +
-            error.message
+            "Digite um e-mail válido."
         );
 
         return;
@@ -2945,34 +1822,50 @@ async function excluirExperimento(id) {
     }
 
 
-    alert(
-        "Experimento excluído."
-    );
+    let assunto =
+        "Experimento - " +
+        nomeExperimento;
 
 
-    mostrarExperimentos();
-
-}
-
+    let corpo =
+        gerarTextoExperimento();
 
 
-/* =====================================================
-   FECHAR EXPERIMENTOS
-===================================================== */
+    let url =
 
-function fecharExperimentos() {
+        "mailto:" +
+        encodeURIComponent(email) +
 
-    document
-        .getElementById(
-            "listaExperimentos"
-        )
-        .classList
-        .add(
-            "escondido"
+        "?subject=" +
+        encodeURIComponent(assunto) +
+
+        "&body=" +
+        encodeURIComponent(corpo);
+
+
+    window.location.href =
+        url;
+
+
+    let mensagem =
+        document.getElementById(
+            "mensagemEmailResultado"
         );
 
-}
 
+    if (
+        mensagem
+    ) {
+
+        mensagem.className =
+            "email-mensagem ok";
+
+        mensagem.innerText =
+            "O aplicativo de e-mail foi aberto com o experimento preenchido.";
+
+    }
+
+}
 
 
 /* =====================================================
@@ -2985,16 +1878,11 @@ function voltarResultado() {
 
 
     document
-        .getElementById(
-            "telaResultado"
-        )
+        .getElementById("telaResultado")
         .classList
-        .remove(
-            "escondido"
-        );
+        .remove("escondido");
 
 }
-
 
 
 /* =====================================================
@@ -3032,139 +1920,71 @@ function novoExperimento() {
 
 
     document
-        .getElementById(
-            "nomeExperimento"
-        )
+        .getElementById("nomeExperimento")
         .value = "";
 
 
     document
-        .getElementById(
-            "volumeSuspensao"
-        )
+        .getElementById("volumeSuspensao")
         .value = "";
 
 
     document
-        .getElementById(
-            "fatorDiluicao"
-        )
+        .getElementById("fatorDiluicao")
         .value = "";
 
 
     document
-        .getElementById(
-            "numeroPocos"
-        )
+        .getElementById("numeroPocos")
         .value = "";
 
 
     document
-        .getElementById(
-            "celulasPorPoco"
-        )
+        .getElementById("celulasPorPoco")
         .value = "";
 
 
     document
-        .getElementById(
-            "volumePoco"
-        )
+        .getElementById("volumePoco")
         .value = "";
 
 
-    document
-        .getElementById(
-            "contadorTela"
-        )
-        .classList
-        .add(
-            "escondido"
+    let email =
+        document.getElementById(
+            "emailEnvioResultado"
         );
 
 
-    document
-        .getElementById(
-            "resultadoPlaqueamento"
-        )
-        .classList
-        .add(
-            "escondido"
-        );
+    if (
+        email
+    ) {
+
+        email.value = "";
+
+    }
 
 
     document
-        .getElementById(
-            "listaExperimentos"
-        )
+        .getElementById("contadorTela")
         .classList
-        .add(
-            "escondido"
-        );
+        .add("escondido");
+
+
+    document
+        .getElementById("resultadoPlaqueamento")
+        .classList
+        .add("escondido");
 
 
     esconderTodasAsTelas();
 
 
     document
-        .getElementById(
-            "telaInicial"
-        )
+        .getElementById("telaInicial")
         .classList
-        .remove(
-            "escondido"
-        );
-
-
-    if (
-        usuarioAtual
-    ) {
-
-        document
-            .getElementById(
-                "areaLogin"
-            )
-            .classList
-            .add(
-                "escondido"
-            );
-
-
-        document
-            .getElementById(
-                "areaUsuario"
-            )
-            .classList
-            .remove(
-                "escondido"
-            );
-
-    }
+        .remove("escondido");
 
 }
-
-
-
-/* =====================================================
-   SEGURANÇA
-===================================================== */
-
-function escaparHTML(texto) {
-
-    let div =
-        document.createElement(
-            "div"
-        );
-
-
-    div.textContent =
-        texto;
-
-
-    return div.innerHTML;
-
-}
-
 
 
 /* =====================================================
@@ -3178,13 +1998,9 @@ document.addEventListener(
         let contadorAberto =
 
             !document
-                .getElementById(
-                    "contadorTela"
-                )
+                .getElementById("contadorTela")
                 .classList
-                .contains(
-                    "escondido"
-                );
+                .contains("escondido");
 
 
         if (
@@ -3210,9 +2026,7 @@ document.addEventListener(
 
 
             document
-                .getElementById(
-                    "contadorGrande"
-                )
+                .getElementById("contadorGrande")
                 .innerText =
                     contagens[
                         quadranteAtual
