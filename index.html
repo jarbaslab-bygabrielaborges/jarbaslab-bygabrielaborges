@@ -8,421 +8,649 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
 
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f4f7f9;
-        color: #1f2933;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    header {
-        background: #173b57;
-        color: white;
-        padding: 20px;
-        text-align: center;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f9;
+    color: #1f2933;
+}
 
-    header h1 {
-        margin: 0;
-        font-size: 25px;
-    }
+header {
+    background: #173b57;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
 
-    header p {
-        margin: 6px 0 0;
-        font-size: 14px;
-        opacity: 0.9;
-    }
+header h1 {
+    margin: 0;
+    font-size: 25px;
+}
 
-    main {
-        max-width: 850px;
-        margin: 25px auto;
-        padding: 0 15px 40px;
-    }
+header p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
 
-    .card {
-        background: white;
-        border-radius: 14px;
-        padding: 22px;
-        margin-bottom: 18px;
-        box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
+main {
+    max-width: 850px;
+    margin: 25px auto;
+    padding: 0 15px 40px;
+}
 
-    h2, h3 {
-        margin-top: 0;
-    }
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
 
-    input {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccd5dc;
-        border-radius: 8px;
-        margin-top: 6px;
-        margin-bottom: 14px;
-        font-size: 16px;
-    }
+h2,
+h3 {
+    margin-top: 0;
+}
 
-    button {
-        border: none;
-        border-radius: 9px;
-        padding: 13px 18px;
-        font-size: 15px;
-        cursor: pointer;
-        margin: 4px;
-    }
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 500;
+}
 
-    .primary {
-        background: #173b57;
-        color: white;
-    }
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccd5dc;
+    border-radius: 8px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    font-size: 16px;
+}
 
-    .secondary {
-        background: #e7edf2;
-        color: #173b57;
-    }
+button {
+    border: none;
+    border-radius: 9px;
+    padding: 13px 18px;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 4px;
+}
 
-    .danger {
-        background: #b42318;
-        color: white;
-    }
+button:active {
+    transform: scale(0.98);
+}
 
-    .module-button {
-        width: 100%;
-        padding: 20px;
-        margin: 8px 0;
-        background: white;
-        border: 2px solid #d5dee5;
-        color: #173b57;
-        text-align: left;
-    }
+.primary {
+    background: #173b57;
+    color: white;
+}
 
-    .module-button strong {
-        display: block;
-        font-size: 18px;
-        margin-bottom: 5px;
-    }
+.secondary {
+    background: #e7edf2;
+    color: #173b57;
+}
 
-    .module-button span {
-        font-size: 13px;
-        color: #667781;
-    }
+.danger {
+    background: #b42318;
+    color: white;
+}
+
+.module-button {
+    width: 100%;
+    padding: 20px;
+    margin: 8px 0;
+    background: white;
+    border: 2px solid #d5dee5;
+    color: #173b57;
+    text-align: left;
+}
+
+.module-button strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.module-button span {
+    font-size: 13px;
+    color: #667781;
+}
+
+.quadrantes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.quadrante {
+    background: #eef4f8;
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.quadrante.atual {
+    border: 3px solid #173b57;
+    background: #e3edf4;
+}
+
+.numero {
+    font-size: 34px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.resultado {
+    background: #edf7ef;
+    border-left: 5px solid #2e7d32;
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.historico-item {
+    border: 1px solid #d8e0e5;
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 12px;
+    background: #fafcfd;
+}
+
+.historico-titulo {
+    font-size: 18px;
+    font-weight: bold;
+    color: #173b57;
+    margin-bottom: 10px;
+}
+
+.linha {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+}
+
+.oculto {
+    display: none !important;
+}
+
+.mensagem {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background: #eef4f8;
+}
+
+.texto-ajuda {
+    color: #667781;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.titulo-contagem-box {
+    background: #f4f7f9;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.titulo-contagem-box label {
+    margin-top: 0;
+    font-weight: bold;
+}
+
+.titulo-contagem-box input {
+    margin-bottom: 0;
+}
+
+.identificacao-atual {
+    background: #e7f0f6;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+    color: #173b57;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #71808a;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
 
     .quadrantes {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        margin: 20px 0;
+        grid-template-columns: 1fr;
     }
 
-    .quadrante {
-        background: #eef4f8;
-        border-radius: 10px;
-        padding: 18px;
-        text-align: center;
-        font-size: 18px;
-    }
+}
 
-    .quadrante.atual {
-        border: 3px solid #173b57;
-        background: #e3edf4;
-    }
-
-    .numero {
-        font-size: 34px;
-        font-weight: bold;
-        margin-top: 8px;
-    }
-
-    .resultado {
-        background: #edf7ef;
-        border-left: 5px solid #2e7d32;
-        padding: 18px;
-        border-radius: 8px;
-        margin-top: 15px;
-    }
-
-    .historico-item {
-        border: 1px solid #d8e0e5;
-        border-radius: 10px;
-        padding: 16px;
-        margin-top: 12px;
-        background: #fafcfd;
-    }
-
-    .historico-titulo {
-        font-size: 18px;
-        font-weight: bold;
-        color: #173b57;
-        margin-bottom: 10px;
-    }
-
-    .linha {
-        display: flex;
-        justify-content: space-between;
-        padding: 4px 0;
-    }
-
-    .oculto {
-        display: none !important;
-    }
-
-    .mensagem {
-        padding: 12px;
-        border-radius: 8px;
-        margin-bottom: 15px;
-        background: #eef4f8;
-    }
-
-    .texto-ajuda {
-        color: #667781;
-        font-size: 14px;
-        line-height: 1.5;
-    }
-
-    footer {
-        text-align: center;
-        padding: 20px;
-        color: #71808a;
-        font-size: 13px;
-    }
-
-    @media (max-width: 600px) {
-        .quadrantes {
-            grid-template-columns: 1fr;
-        }
-    }
 </style>
 </head>
 
 <body>
 
 <header>
+
     <h1>🧪 Jarbas Lab</h1>
+
     <p>🔬 Neubauer Cell Counter</p>
+
 </header>
+
 
 <main>
 
-    <!-- LOGIN -->
-    <section id="telaLogin" class="card">
-        <h2>Entrar</h2>
 
-        <label>E-mail</label>
-        <input type="email" id="email">
+<!-- =====================================================
+     LOGIN
+===================================================== -->
 
-        <label>Senha</label>
-        <input type="password" id="senha">
+<section id="telaLogin" class="card">
 
-        <button class="primary" onclick="login()">ENTRAR</button>
-        <button class="secondary" onclick="cadastrar()">CRIAR CONTA</button>
+    <h2>Entrar</h2>
 
-        <div id="mensagemLogin"></div>
-    </section>
+    <label>E-mail</label>
 
+    <input
+        type="email"
+        id="email"
+        autocomplete="email"
+    >
 
-    <!-- MENU PRINCIPAL -->
-    <section id="telaInicial" class="oculto">
+    <label>Senha</label>
 
-        <div class="card">
-            <h2>Novo experimento</h2>
+    <input
+        type="password"
+        id="senha"
+        autocomplete="current-password"
+    >
 
-            <label>Nome do experimento</label>
-            <input
-                type="text"
-                id="nomeExperimento"
-                placeholder="Ex.: Experimento IPA"
-            >
+    <button
+        class="primary"
+        onclick="login()"
+    >
+        ENTRAR
+    </button>
 
-            <label>Volume da suspensão (µL)</label>
-            <input
-                type="number"
-                id="volumeSuspensao"
-                step="any"
-                placeholder="Ex.: 1000"
-            >
+    <button
+        class="secondary"
+        onclick="cadastrar()"
+    >
+        CRIAR CONTA
+    </button>
 
-            <label>Fator de diluição</label>
-            <input
-                type="number"
-                id="fatorDiluicao"
-                step="any"
-                value="1"
-                placeholder="Ex.: 2"
-            >
-        </div>
+    <div id="mensagemLogin"></div>
 
-        <div class="card">
-            <h2>Escolha o tipo de contagem</h2>
-
-            <button class="module-button" onclick="configurarModulo('plaquear')">
-                <strong>PLAQUEAR</strong>
-                <span>4 quadrantes · relação de 0,4 µL</span>
-            </button>
-
-            <button class="module-button" onclick="configurarModulo('tratamentos')">
-                <strong>TRATAMENTOS</strong>
-                <span>4 quadrantes · relação de 0,4 µL · várias contagens</span>
-            </button>
-
-            <button class="module-button" onclick="configurarModulo('primaria')">
-                <strong>CULTURA PRIMÁRIA</strong>
-                <span>1 quadrante · relação de 0,1 µL</span>
-            </button>
-        </div>
-
-        <div class="card">
-            <h2>Experimentos salvos</h2>
-            <button class="secondary" onclick="carregarExperimentos()">
-                ATUALIZAR LISTA
-            </button>
-
-            <div id="listaExperimentos"></div>
-        </div>
-
-    </section>
+</section>
 
 
-    <!-- IDENTIFICAÇÃO DA CONTAGEM DE TRATAMENTOS -->
-    <section id="telaTituloContagem" class="card oculto">
+<!-- =====================================================
+     TELA INICIAL
+===================================================== -->
 
-        <h2>Identificação da contagem</h2>
+<section id="telaInicial" class="oculto">
 
-        <p class="texto-ajuda">
-            Informe o título ou condição correspondente a esta contagem.
-            <br>
-            Exemplos: <strong>Controle</strong>, <strong>10 µM</strong>,
-            <strong>50 µM</strong>, <strong>IPA 100 µM</strong>.
-        </p>
 
-        <label>Título da contagem</label>
+    <div class="card">
+
+        <h2>Novo experimento</h2>
+
+        <label>Nome do experimento</label>
+
+        <input
+            type="text"
+            id="nomeExperimento"
+            placeholder="Ex.: Experimento IPA"
+        >
+
+
+        <label>Volume da suspensão (µL)</label>
+
+        <input
+            type="number"
+            id="volumeSuspensao"
+            step="any"
+            placeholder="Ex.: 1000"
+        >
+
+
+        <label>Fator de diluição</label>
+
+        <input
+            type="number"
+            id="fatorDiluicao"
+            step="any"
+            value="1"
+            placeholder="Ex.: 2"
+        >
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Escolha o tipo de contagem</h2>
+
+
+        <button
+            class="module-button"
+            onclick="configurarModulo('plaquear')"
+        >
+
+            <strong>PLAQUEAR</strong>
+
+            <span>
+                4 quadrantes · relação de 0,4 µL
+            </span>
+
+        </button>
+
+
+        <button
+            class="module-button"
+            onclick="configurarModulo('tratamentos')"
+        >
+
+            <strong>TRATAMENTOS</strong>
+
+            <span>
+                4 quadrantes · relação de 0,4 µL · várias contagens
+            </span>
+
+        </button>
+
+
+        <button
+            class="module-button"
+            onclick="configurarModulo('primaria')"
+        >
+
+            <strong>CULTURA PRIMÁRIA</strong>
+
+            <span>
+                1 quadrante · relação de 0,1 µL
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Experimentos salvos</h2>
+
+        <button
+            class="secondary"
+            onclick="carregarExperimentos()"
+        >
+            ATUALIZAR LISTA
+        </button>
+
+        <div id="listaExperimentos"></div>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     TELA DE CONTAGEM
+===================================================== -->
+
+<section id="telaContagem" class="card oculto">
+
+
+    <h2 id="tituloModuloContagem">
+        Contagem
+    </h2>
+
+
+    <!-- TÍTULO DA CONTAGEM - SOMENTE TRATAMENTOS -->
+
+    <div
+        id="campoTituloTratamento"
+        class="titulo-contagem-box oculto"
+    >
+
+        <label>
+            Título da contagem
+        </label>
+
         <input
             type="text"
             id="tituloContagem"
-            placeholder="Ex.: Controle"
+            placeholder="Ex.: Controle, 10 µM, 50 µM, IPA 100 µM..."
         >
 
-        <button class="primary" onclick="iniciarContagemTratamento()">
-            INICIAR CONTAGEM
-        </button>
-
-        <button class="secondary" onclick="voltarInicio()">
-            VOLTAR
-        </button>
-
-    </section>
+    </div>
 
 
-    <!-- TELA DE CONTAGEM -->
-    <section id="telaContagem" class="card oculto">
+    <div
+        id="identificacaoContagem"
+        class="identificacao-atual oculto"
+    ></div>
 
-        <div id="informacaoContagem"></div>
 
-        <h2 id="tituloQuadrante">Quadrante 1</h2>
+    <p class="texto-ajuda">
 
-        <p class="texto-ajuda">
-            Use <strong>Espaço</strong> ou <strong>Enter</strong> para adicionar
-            uma célula.<br>
-            Use <strong>Backspace</strong> ou <strong>←</strong> para desfazer.
-            <br>
-            Use <strong>Esc</strong> para finalizar o quadrante.
-        </p>
+        Use <strong>Espaço</strong> ou <strong>Enter</strong>
+        para adicionar uma célula.
 
-        <div class="quadrantes" id="listaQuadrantes"></div>
+        <br>
 
-        <div style="text-align:center;">
-            <div>Contagem atual</div>
-            <div class="numero" id="contadorAtual">0</div>
+        Use <strong>Backspace</strong> ou <strong>←</strong>
+        para desfazer.
+
+        <br>
+
+        Use <strong>Esc</strong> para finalizar o quadrante.
+
+    </p>
+
+
+    <h3 id="tituloQuadrante">
+        Quadrante 1
+    </h3>
+
+
+    <div
+        class="quadrantes"
+        id="listaQuadrantes"
+    ></div>
+
+
+    <div style="text-align:center; margin-top:20px;">
+
+        <div>
+            Contagem atual
         </div>
 
-        <div style="text-align:center; margin-top:20px;">
-            <button class="secondary" onclick="desfazerContagem()">
-                ← DESFAZER
-            </button>
-
-            <button class="primary" onclick="finalizarQuadrante()">
-                FINALIZAR QUADRANTE
-            </button>
+        <div
+            class="numero"
+            id="contadorAtual"
+        >
+            0
         </div>
 
-    </section>
+    </div>
 
 
-    <!-- RESULTADO -->
-    <section id="telaResultado" class="card oculto">
+    <div style="text-align:center; margin-top:20px;">
 
-        <h2>Resultado</h2>
-
-        <div id="resultadoConteudo"></div>
-
-        <div id="historicoTratamentos"></div>
-
-        <div style="text-align:center; margin-top:20px;">
-            <button
-                id="botaoNovaContagem"
-                class="primary oculto"
-                onclick="novaContagemTratamento()"
-            >
-                ＋ NOVA CONTAGEM
-            </button>
-
-            <button class="primary" onclick="salvarExperimento()">
-                💾 SALVAR EXPERIMENTO
-            </button>
-
-            <button class="secondary" onclick="novoExperimento()">
-                NOVO EXPERIMENTO
-            </button>
-        </div>
-
-    </section>
-
-
-    <!-- PLAQUEAMENTO -->
-    <section id="telaPlaqueamento" class="card oculto">
-
-        <h2>Calculadora de Plaqueamento</h2>
-
-        <label>Número de poços</label>
-        <input type="number" id="numeroPocos" step="1">
-
-        <label>Células por poço</label>
-        <input type="number" id="celulasPorPoco" step="any">
-
-        <label>Volume final por poço (µL) — opcional</label>
-        <input type="number" id="volumePoco" step="any">
-
-        <button class="primary" onclick="calcularPlaqueamento()">
-            CALCULAR
+        <button
+            class="secondary"
+            onclick="desfazerContagem()"
+        >
+            ← DESFAZER
         </button>
 
-        <div id="resultadoPlaqueamento"></div>
 
-        <button class="secondary" onclick="voltarInicio()">
-            VOLTAR
+        <button
+            class="primary"
+            onclick="finalizarQuadrante()"
+        >
+            FINALIZAR QUADRANTE
         </button>
 
-    </section>
+    </div>
+
+
+    <div style="text-align:center; margin-top:10px;">
+
+        <button
+            class="secondary"
+            onclick="voltarInicio()"
+        >
+            CANCELAR
+        </button>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     TELA DE RESULTADO
+===================================================== -->
+
+<section id="telaResultado" class="card oculto">
+
+
+    <h2>Resultado</h2>
+
+
+    <div id="resultadoConteudo"></div>
+
+
+    <div id="historicoTratamentos"></div>
+
+
+    <div style="text-align:center; margin-top:20px;">
+
+
+        <button
+            id="botaoNovaContagem"
+            class="primary oculto"
+            onclick="novaContagemTratamento()"
+        >
+            ＋ NOVA CONTAGEM
+        </button>
+
+
+        <button
+            class="primary"
+            onclick="salvarExperimento()"
+        >
+            💾 SALVAR EXPERIMENTO
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="novoExperimento()"
+        >
+            NOVO EXPERIMENTO
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     CALCULADORA DE PLAQUEAMENTO
+===================================================== -->
+
+<section id="telaPlaqueamento" class="card oculto">
+
+    <h2>Calculadora de Plaqueamento</h2>
+
+
+    <label>Número de poços</label>
+
+    <input
+        type="number"
+        id="numeroPocos"
+        step="1"
+    >
+
+
+    <label>Células por poço</label>
+
+    <input
+        type="number"
+        id="celulasPorPoco"
+        step="any"
+    >
+
+
+    <label>
+        Volume final por poço (µL) — opcional
+    </label>
+
+    <input
+        type="number"
+        id="volumePoco"
+        step="any"
+    >
+
+
+    <button
+        class="primary"
+        onclick="calcularPlaqueamento()"
+    >
+        CALCULAR
+    </button>
+
+
+    <div id="resultadoPlaqueamento"></div>
+
+
+    <button
+        class="secondary"
+        onclick="voltarInicio()"
+    >
+        VOLTAR
+    </button>
+
+</section>
+
 
 </main>
 
+
 <footer>
+
     © 2026 Gabriela Ribeiro Borges
+
 </footer>
 
 
 <script>
 
-/* =========================================================
+/* =====================================================
    SUPABASE
-========================================================= */
+===================================================== */
 
-const SUPABASE_URL = "https://kqdauctjaisymizdjuzf.supabase.co";
+const SUPABASE_URL =
+    "https://kqdauctjaisymizdjuzf.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_gAisFOa518ndwmrivbZAqw_WsY9p4oM";
+    "sb_publishable_gAisFOa518ndwmrivbZAqw_WsY9p4oM";
 
 const supabaseClient =
     window.supabase.createClient(
@@ -431,48 +659,54 @@ const supabaseClient =
     );
 
 
-/* =========================================================
+/* =====================================================
    VARIÁVEIS
-========================================================= */
+===================================================== */
 
 let usuarioAtual = null;
 
 let moduloAtual = null;
+
 let nomeModulo = "";
+
 let numeroQuadrantes = 4;
+
 let relacaoVolume = 0.4;
 
 let quadrantes = [];
+
 let quadranteAtual = 0;
 
 let volumeSuspensao = 0;
+
 let fatorDiluicao = 1;
+
 let nomeExperimento = "";
 
 let historicoContagens = [];
+
 let resultadoAtual = null;
 
 let dadosPlaqueamento = null;
 
-/*
-    Guarda o ID do experimento depois que ele for salvo.
-    Assim, novas contagens de Tratamentos podem atualizar
-    o mesmo experimento em vez de criar vários.
-*/
 let experimentoSalvoId = null;
 
 let tituloContagemAtual = "";
 
 
-/* =========================================================
-   FUNÇÕES DE TELA
-========================================================= */
+/* =====================================================
+   CONTROLE DAS TELAS
+===================================================== */
 
 function esconderTodasAsTelas() {
 
-    document.querySelectorAll("main > section").forEach(secao => {
-        secao.classList.add("oculto");
-    });
+    document
+        .querySelectorAll("main > section")
+        .forEach(secao => {
+
+            secao.classList.add("oculto");
+
+        });
 }
 
 
@@ -480,7 +714,9 @@ function mostrarTela(id) {
 
     esconderTodasAsTelas();
 
-    document.getElementById(id).classList.remove("oculto");
+    document
+        .getElementById(id)
+        .classList.remove("oculto");
 }
 
 
@@ -492,28 +728,47 @@ function voltarInicio() {
 }
 
 
-/* =========================================================
+/* =====================================================
    LOGIN
-========================================================= */
+===================================================== */
 
 async function login() {
 
-    const email = document.getElementById("email").value.trim();
-    const senha = document.getElementById("senha").value;
+    const email =
+        document
+            .getElementById("email")
+            .value
+            .trim();
+
+    const senha =
+        document
+            .getElementById("senha")
+            .value;
+
 
     const { data, error } =
         await supabaseClient.auth.signInWithPassword({
-            email,
+
+            email: email,
+
             password: senha
+
         });
+
 
     if (error) {
 
-        document.getElementById("mensagemLogin").innerHTML =
-            `<div class="mensagem">${error.message}</div>`;
+        document
+            .getElementById("mensagemLogin")
+            .innerHTML = `
+                <div class="mensagem">
+                    ${escaparHTML(error.message)}
+                </div>
+            `;
 
         return;
     }
+
 
     usuarioAtual = data.user;
 
@@ -525,302 +780,473 @@ async function login() {
 
 async function cadastrar() {
 
-    const email = document.getElementById("email").value.trim();
-    const senha = document.getElementById("senha").value;
+    const email =
+        document
+            .getElementById("email")
+            .value
+            .trim();
+
+    const senha =
+        document
+            .getElementById("senha")
+            .value;
+
 
     const { error } =
         await supabaseClient.auth.signUp({
-            email,
+
+            email: email,
+
             password: senha
+
         });
+
 
     if (error) {
 
-        document.getElementById("mensagemLogin").innerHTML =
-            `<div class="mensagem">${error.message}</div>`;
+        document
+            .getElementById("mensagemLogin")
+            .innerHTML = `
+                <div class="mensagem">
+                    ${escaparHTML(error.message)}
+                </div>
+            `;
 
         return;
     }
 
-    document.getElementById("mensagemLogin").innerHTML =
-        `<div class="mensagem">
-            Cadastro realizado. Verifique seu e-mail para confirmar a conta.
-        </div>`;
+
+    document
+        .getElementById("mensagemLogin")
+        .innerHTML = `
+            <div class="mensagem">
+                Cadastro realizado.
+                Verifique seu e-mail para confirmar a conta.
+            </div>
+        `;
 }
 
 
-/* =========================================================
-   CONFIGURAÇÃO DO MÓDULO
-========================================================= */
+/* =====================================================
+   CONFIGURAÇÃO DOS MÓDULOS
+===================================================== */
 
 function configurarModulo(modulo) {
 
     moduloAtual = modulo;
 
+
     nomeExperimento =
-        document.getElementById("nomeExperimento").value.trim();
+        document
+            .getElementById("nomeExperimento")
+            .value
+            .trim();
+
 
     volumeSuspensao =
-        parseFloat(document.getElementById("volumeSuspensao").value);
+        parseFloat(
+            document
+                .getElementById("volumeSuspensao")
+                .value
+        );
+
 
     fatorDiluicao =
-        parseFloat(document.getElementById("fatorDiluicao").value) || 1;
+        parseFloat(
+            document
+                .getElementById("fatorDiluicao")
+                .value
+        ) || 1;
+
 
     if (!nomeExperimento) {
 
-        alert("Informe o nome do experimento.");
+        alert(
+            "Informe o nome do experimento."
+        );
 
         return;
     }
 
-    if (!volumeSuspensao || volumeSuspensao <= 0) {
 
-        alert("Informe o volume da suspensão.");
+    if (
+        !volumeSuspensao ||
+        volumeSuspensao <= 0
+    ) {
+
+        alert(
+            "Informe o volume da suspensão."
+        );
 
         return;
     }
 
 
     historicoContagens = [];
+
     resultadoAtual = null;
+
     experimentoSalvoId = null;
+
     dadosPlaqueamento = null;
 
-
-    if (modulo === "primaria") {
-
-        numeroQuadrantes = 1;
-        relacaoVolume = 0.1;
-        nomeModulo = "Cultura Primária";
-
-        iniciarNovaContagem();
-    }
+    tituloContagemAtual = "";
 
 
-    else if (modulo === "tratamentos") {
+    /* =========================
+       TRATAMENTOS
+    ========================= */
+
+    if (modulo === "tratamentos") {
 
         numeroQuadrantes = 4;
+
         relacaoVolume = 0.4;
+
         nomeModulo = "Tratamentos";
 
-        /*
-            Antes de contar, pede o título da condição.
-        */
-
-        document.getElementById("tituloContagem").value = "";
-
-        mostrarTela("telaTituloContagem");
-
-        setTimeout(() => {
-            document.getElementById("tituloContagem").focus();
-        }, 100);
-    }
-
-
-    else {
-
-        numeroQuadrantes = 4;
-        relacaoVolume = 0.4;
-        nomeModulo = "Plaquear";
 
         iniciarNovaContagem();
-    }
-}
-
-
-/* =========================================================
-   INICIAR CONTAGEM DE TRATAMENTOS
-========================================================= */
-
-function iniciarContagemTratamento() {
-
-    const titulo =
-        document.getElementById("tituloContagem").value.trim();
-
-    if (!titulo) {
-
-        alert("Informe um título para esta contagem.");
 
         return;
     }
 
-    tituloContagemAtual = titulo;
+
+    /* =========================
+       CULTURA PRIMÁRIA
+    ========================= */
+
+    if (modulo === "primaria") {
+
+        numeroQuadrantes = 1;
+
+        relacaoVolume = 0.1;
+
+        nomeModulo = "Cultura Primária";
+
+
+        iniciarNovaContagem();
+
+        return;
+    }
+
+
+    /* =========================
+       PLAQUEAR
+    ========================= */
+
+    numeroQuadrantes = 4;
+
+    relacaoVolume = 0.4;
+
+    nomeModulo = "Plaquear";
+
 
     iniciarNovaContagem();
 }
 
 
-/* =========================================================
+/* =====================================================
    INICIAR NOVA CONTAGEM
-========================================================= */
+===================================================== */
 
 function iniciarNovaContagem() {
 
     quadrantes =
-        new Array(numeroQuadrantes).fill(0);
+        new Array(numeroQuadrantes)
+            .fill(0);
+
 
     quadranteAtual = 0;
 
-    atualizarTelaContagem();
 
-    mostrarTela("telaContagem");
-}
+    const campoTitulo =
+        document
+            .getElementById(
+                "campoTituloTratamento"
+            );
 
 
-/* =========================================================
-   TELA DE CONTAGEM
-========================================================= */
+    const identificacao =
+        document
+            .getElementById(
+                "identificacaoContagem"
+            );
 
-function atualizarTelaContagem() {
-
-    document.getElementById("tituloQuadrante").textContent =
-        `Quadrante ${quadranteAtual + 1}`;
-
-    document.getElementById("contadorAtual").textContent =
-        quadrantes[quadranteAtual];
-
-    atualizarListaQuadrantes();
-
-    const informacao =
-        document.getElementById("informacaoContagem");
 
     if (moduloAtual === "tratamentos") {
 
-        informacao.innerHTML =
-            `<div class="mensagem">
-                <strong>Contagem:</strong>
-                ${escaparHTML(tituloContagemAtual)}
-            </div>`;
+        campoTitulo
+            .classList
+            .remove("oculto");
+
+
+        identificacao
+            .classList
+            .add("oculto");
+
+
+        document
+            .getElementById(
+                "tituloContagem"
+            )
+            .value = "";
+
+
     }
 
     else {
 
-        informacao.innerHTML = "";
+        campoTitulo
+            .classList
+            .add("oculto");
+
+
+        identificacao
+            .classList
+            .add("oculto");
+    }
+
+
+    atualizarTelaContagem();
+
+    mostrarTela("telaContagem");
+
+
+    if (moduloAtual === "tratamentos") {
+
+        setTimeout(() => {
+
+            document
+                .getElementById(
+                    "tituloContagem"
+                )
+                .focus();
+
+        }, 100);
     }
 }
 
 
+/* =====================================================
+   ATUALIZAR TELA DE CONTAGEM
+===================================================== */
+
+function atualizarTelaContagem() {
+
+    document
+        .getElementById(
+            "tituloModuloContagem"
+        )
+        .textContent = nomeModulo;
+
+
+    document
+        .getElementById(
+            "tituloQuadrante"
+        )
+        .textContent =
+            `Quadrante ${quadranteAtual + 1}`;
+
+
+    document
+        .getElementById(
+            "contadorAtual"
+        )
+        .textContent =
+            quadrantes[quadranteAtual];
+
+
+    atualizarListaQuadrantes();
+}
+
+
+/* =====================================================
+   LISTA DE QUADRANTES
+===================================================== */
+
 function atualizarListaQuadrantes() {
 
     const lista =
-        document.getElementById("listaQuadrantes");
+        document
+            .getElementById(
+                "listaQuadrantes"
+            );
+
 
     lista.innerHTML = "";
 
-    for (let i = 0; i < numeroQuadrantes; i++) {
+
+    for (
+        let i = 0;
+        i < numeroQuadrantes;
+        i++
+    ) {
 
         const div =
             document.createElement("div");
 
-        div.className = "quadrante";
 
-        if (i === quadranteAtual) {
+        div.className =
+            "quadrante";
+
+
+        if (
+            i === quadranteAtual
+        ) {
 
             div.classList.add("atual");
         }
 
-        div.innerHTML =
-            `<strong>Q${i + 1}</strong>
-             <div class="numero">${quadrantes[i]}</div>`;
+
+        div.innerHTML = `
+
+            <strong>
+                Q${i + 1}
+            </strong>
+
+            <div class="numero">
+                ${quadrantes[i]}
+            </div>
+
+        `;
+
 
         lista.appendChild(div);
     }
 }
 
 
-/* =========================================================
-   CONTAGEM PELO TECLADO
-========================================================= */
+/* =====================================================
+   TECLADO
+===================================================== */
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener(
+    "keydown",
+    function(event) {
 
-    const tela =
-        document.getElementById("telaContagem");
-
-    if (tela.classList.contains("oculto")) {
-
-        return;
-    }
-
-    /*
-        Não conta se o usuário estiver digitando em algum input.
-    */
-
-    if (
-        event.target.tagName === "INPUT" ||
-        event.target.tagName === "TEXTAREA"
-    ) {
-
-        return;
-    }
+        const tela =
+            document
+                .getElementById(
+                    "telaContagem"
+                );
 
 
-    if (
-        event.code === "Space" ||
-        event.key === "Enter"
-    ) {
+        if (
+            tela.classList.contains(
+                "oculto"
+            )
+        ) {
 
-        event.preventDefault();
-
-        quadrantes[quadranteAtual]++;
-
-        atualizarTelaContagem();
-
-        return;
-    }
-
-
-    if (
-        event.key === "Backspace" ||
-        event.key === "ArrowLeft"
-    ) {
-
-        event.preventDefault();
-
-        if (quadrantes[quadranteAtual] > 0) {
-
-            quadrantes[quadranteAtual]--;
+            return;
         }
 
-        atualizarTelaContagem();
 
-        return;
+        /*
+         * Se estiver digitando o título,
+         * não conta células.
+         */
+
+        if (
+            event.target.tagName === "INPUT" ||
+            event.target.tagName === "TEXTAREA"
+        ) {
+
+            return;
+        }
+
+
+        if (
+            event.code === "Space" ||
+            event.key === "Enter"
+        ) {
+
+            event.preventDefault();
+
+
+            quadrantes[
+                quadranteAtual
+            ]++;
+
+
+            atualizarTelaContagem();
+
+            return;
+        }
+
+
+        if (
+            event.key === "Backspace" ||
+            event.key === "ArrowLeft"
+        ) {
+
+            event.preventDefault();
+
+
+            if (
+                quadrantes[
+                    quadranteAtual
+                ] > 0
+            ) {
+
+                quadrantes[
+                    quadranteAtual
+                ]--;
+            }
+
+
+            atualizarTelaContagem();
+
+            return;
+        }
+
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            event.preventDefault();
+
+            finalizarQuadrante();
+
+            return;
+        }
     }
+);
 
 
-    if (event.key === "Escape") {
-
-        event.preventDefault();
-
-        finalizarQuadrante();
-
-        return;
-    }
-});
-
-
-/* =========================================================
+/* =====================================================
    DESFAZER
-========================================================= */
+===================================================== */
 
 function desfazerContagem() {
 
-    if (quadrantes[quadranteAtual] > 0) {
+    if (
+        quadrantes[
+            quadranteAtual
+        ] > 0
+    ) {
 
-        quadrantes[quadranteAtual]--;
+        quadrantes[
+            quadranteAtual
+        ]--;
     }
+
 
     atualizarTelaContagem();
 }
 
 
-/* =========================================================
+/* =====================================================
    FINALIZAR QUADRANTE
-========================================================= */
+===================================================== */
 
 function finalizarQuadrante() {
 
-    if (quadranteAtual < numeroQuadrantes - 1) {
+    if (
+        quadranteAtual <
+        numeroQuadrantes - 1
+    ) {
 
         quadranteAtual++;
 
@@ -829,25 +1255,76 @@ function finalizarQuadrante() {
         return;
     }
 
+
     finalizarContagem();
 }
 
 
-/* =========================================================
+/* =====================================================
    FINALIZAR CONTAGEM
-========================================================= */
+===================================================== */
 
 function finalizarContagem() {
 
+    /*
+     * No módulo Tratamentos,
+     * o título é obrigatório.
+     */
+
+    if (
+        moduloAtual === "tratamentos"
+    ) {
+
+        const titulo =
+            document
+                .getElementById(
+                    "tituloContagem"
+                )
+                .value
+                .trim();
+
+
+        if (!titulo) {
+
+            alert(
+                "Digite o título desta contagem antes de finalizar."
+            );
+
+
+            document
+                .getElementById(
+                    "tituloContagem"
+                )
+                .focus();
+
+
+            return;
+        }
+
+
+        tituloContagemAtual =
+            titulo;
+    }
+
+
     const total =
         quadrantes.reduce(
-            (soma, valor) => soma + valor,
+            (soma, valor) =>
+                soma + valor,
             0
         );
 
 
+    /*
+     * 4 quadrantes = 0,4 µL
+     * 1 quadrante = 0,1 µL
+     */
+
     const celulasPorMicrolitro =
-        (total / relacaoVolume) *
+        (
+            total /
+            relacaoVolume
+        ) *
         fatorDiluicao;
 
 
@@ -863,51 +1340,66 @@ function finalizarContagem() {
                 ? tituloContagemAtual
                 : nomeModulo,
 
-        q1: quadrantes[0] || 0,
+
+        q1:
+            quadrantes[0] || 0,
+
 
         q2:
             numeroQuadrantes >= 2
                 ? quadrantes[1]
                 : null,
 
+
         q3:
             numeroQuadrantes >= 3
                 ? quadrantes[2]
                 : null,
+
 
         q4:
             numeroQuadrantes >= 4
                 ? quadrantes[3]
                 : null,
 
+
         total: total,
+
 
         celulasPorMicrolitro:
             celulasPorMicrolitro,
 
+
         numeroTotalCelulas:
             numeroTotalCelulas,
+
 
         relacaoVolume:
             relacaoVolume,
 
+
         numeroQuadrantes:
             numeroQuadrantes,
+
 
         modulo:
             nomeModulo,
 
+
         data:
             new Date().toISOString()
+
     };
 
 
     /*
-        No Tratamentos, cada contagem fica guardada
-        individualmente no histórico.
-    */
+     * Tratamentos:
+     * adiciona a contagem ao histórico.
+     */
 
-    if (moduloAtual === "tratamentos") {
+    if (
+        moduloAtual === "tratamentos"
+    ) {
 
         historicoContagens.push({
             ...resultadoAtual
@@ -919,67 +1411,103 @@ function finalizarContagem() {
 }
 
 
-/* =========================================================
+/* =====================================================
    MOSTRAR RESULTADO
-========================================================= */
+===================================================== */
 
 function mostrarResultado() {
 
     const div =
-        document.getElementById("resultadoConteudo");
+        document
+            .getElementById(
+                "resultadoConteudo"
+            );
+
 
     let html = "";
 
 
-    if (moduloAtual === "tratamentos") {
+    if (
+        moduloAtual === "tratamentos"
+    ) {
 
-        html += `
+        html = `
+
             <div class="resultado">
-                <strong>Contagem:</strong>
-                ${escaparHTML(resultadoAtual.titulo)}
 
-                <hr>
+                <h3>
+                    ${escaparHTML(
+                        resultadoAtual.titulo
+                    )}
+                </h3>
+
 
                 <div class="linha">
                     <span>Q1</span>
-                    <strong>${resultadoAtual.q1}</strong>
+                    <strong>
+                        ${resultadoAtual.q1}
+                    </strong>
                 </div>
+
 
                 <div class="linha">
                     <span>Q2</span>
-                    <strong>${resultadoAtual.q2}</strong>
+                    <strong>
+                        ${resultadoAtual.q2}
+                    </strong>
                 </div>
+
 
                 <div class="linha">
                     <span>Q3</span>
-                    <strong>${resultadoAtual.q3}</strong>
+                    <strong>
+                        ${resultadoAtual.q3}
+                    </strong>
                 </div>
+
 
                 <div class="linha">
                     <span>Q4</span>
-                    <strong>${resultadoAtual.q4}</strong>
+                    <strong>
+                        ${resultadoAtual.q4}
+                    </strong>
                 </div>
+
 
                 <hr>
 
+
                 <div class="linha">
                     <span>Total</span>
-                    <strong>${resultadoAtual.total}</strong>
+                    <strong>
+                        ${resultadoAtual.total}
+                    </strong>
                 </div>
+
 
                 <div class="linha">
                     <span>Células/µL</span>
+
                     <strong>
-                        ${formatarNumero(resultadoAtual.celulasPorMicrolitro)}
+                        ${formatarNumero(
+                            resultadoAtual
+                                .celulasPorMicrolitro
+                        )}
                     </strong>
                 </div>
 
+
                 <div class="linha">
                     <span>Total de células</span>
+
                     <strong>
-                        ${formatarNumero(resultadoAtual.numeroTotalCelulas)}
+                        ${formatarNumero(
+                            resultadoAtual
+                                .numeroTotalCelulas
+                        )}
                     </strong>
                 </div>
+
             </div>
         `;
     }
@@ -987,74 +1515,110 @@ function mostrarResultado() {
 
     else {
 
-        html += `
+        html = `
+
             <div class="resultado">
 
                 <div class="linha">
                     <span>Módulo</span>
-                    <strong>${nomeModulo}</strong>
+
+                    <strong>
+                        ${nomeModulo}
+                    </strong>
                 </div>
+
 
                 <div class="linha">
                     <span>Q1</span>
-                    <strong>${resultadoAtual.q1}</strong>
+
+                    <strong>
+                        ${resultadoAtual.q1}
+                    </strong>
                 </div>
+
 
                 ${
                     numeroQuadrantes >= 2
                     ? `
                         <div class="linha">
                             <span>Q2</span>
-                            <strong>${resultadoAtual.q2}</strong>
+
+                            <strong>
+                                ${resultadoAtual.q2}
+                            </strong>
                         </div>
                     `
                     : ""
                 }
+
 
                 ${
                     numeroQuadrantes >= 3
                     ? `
                         <div class="linha">
                             <span>Q3</span>
-                            <strong>${resultadoAtual.q3}</strong>
+
+                            <strong>
+                                ${resultadoAtual.q3}
+                            </strong>
                         </div>
                     `
                     : ""
                 }
+
 
                 ${
                     numeroQuadrantes >= 4
                     ? `
                         <div class="linha">
                             <span>Q4</span>
-                            <strong>${resultadoAtual.q4}</strong>
+
+                            <strong>
+                                ${resultadoAtual.q4}
+                            </strong>
                         </div>
                     `
                     : ""
                 }
 
+
                 <hr>
+
 
                 <div class="linha">
                     <span>Total</span>
-                    <strong>${resultadoAtual.total}</strong>
-                </div>
 
-                <div class="linha">
-                    <span>Células/µL</span>
                     <strong>
-                        ${formatarNumero(resultadoAtual.celulasPorMicrolitro)}
+                        ${resultadoAtual.total}
                     </strong>
                 </div>
 
+
+                <div class="linha">
+                    <span>Células/µL</span>
+
+                    <strong>
+                        ${formatarNumero(
+                            resultadoAtual
+                                .celulasPorMicrolitro
+                        )}
+                    </strong>
+                </div>
+
+
                 <div class="linha">
                     <span>Total de células</span>
+
                     <strong>
-                        ${formatarNumero(resultadoAtual.numeroTotalCelulas)}
+                        ${formatarNumero(
+                            resultadoAtual
+                                .numeroTotalCelulas
+                        )}
                     </strong>
                 </div>
 
             </div>
+
         `;
     }
 
@@ -1062,88 +1626,36 @@ function mostrarResultado() {
     div.innerHTML = html;
 
 
+    mostrarHistorico();
+
+
     /*
-        Histórico completo de Tratamentos
-    */
+     * Botão NOVA CONTAGEM aparece
+     * somente em Tratamentos.
+     */
 
-    const historico =
-        document.getElementById("historicoTratamentos");
-
-    if (moduloAtual === "tratamentos") {
-
-        let historicoHTML =
-            `<h3>Histórico das contagens</h3>`;
-
-        historicoContagens.forEach((contagem, index) => {
-
-            historicoHTML += `
-                <div class="historico-item">
-
-                    <div class="historico-titulo">
-                        ${index + 1}.
-                        ${escaparHTML(contagem.titulo)}
-                    </div>
-
-                    <div class="linha">
-                        <span>Q1</span>
-                        <strong>${contagem.q1}</strong>
-                    </div>
-
-                    <div class="linha">
-                        <span>Q2</span>
-                        <strong>${contagem.q2}</strong>
-                    </div>
-
-                    <div class="linha">
-                        <span>Q3</span>
-                        <strong>${contagem.q3}</strong>
-                    </div>
-
-                    <div class="linha">
-                        <span>Q4</span>
-                        <strong>${contagem.q4}</strong>
-                    </div>
-
-                    <hr>
-
-                    <div class="linha">
-                        <span>Total</span>
-                        <strong>${contagem.total}</strong>
-                    </div>
-
-                    <div class="linha">
-                        <span>Células/µL</span>
-                        <strong>
-                            ${formatarNumero(contagem.celulasPorMicrolitro)}
-                        </strong>
-                    </div>
-
-                    <div class="linha">
-                        <span>Total de células</span>
-                        <strong>
-                            ${formatarNumero(contagem.numeroTotalCelulas)}
-                        </strong>
-                    </div>
-
-                </div>
-            `;
-        });
-
-        historico.innerHTML = historicoHTML;
-
+    const botao =
         document
-            .getElementById("botaoNovaContagem")
-            .classList.remove("oculto");
-    }
+            .getElementById(
+                "botaoNovaContagem"
+            );
 
+
+    if (
+        moduloAtual === "tratamentos"
+    ) {
+
+        botao.classList.remove(
+            "oculto"
+        );
+
+    }
 
     else {
 
-        historico.innerHTML = "";
-
-        document
-            .getElementById("botaoNovaContagem")
-            .classList.add("oculto");
+        botao.classList.add(
+            "oculto"
+        );
     }
 
 
@@ -1151,40 +1663,169 @@ function mostrarResultado() {
 }
 
 
-/* =========================================================
-   NOVA CONTAGEM DE TRATAMENTOS
-========================================================= */
+/* =====================================================
+   MOSTRAR HISTÓRICO DOS TRATAMENTOS
+===================================================== */
 
-function novaContagemTratamento() {
+function mostrarHistorico() {
 
-    /*
-        Volta para a tela onde o usuário informa
-        o nome da próxima condição.
-    */
-
-    document.getElementById("tituloContagem").value = "";
-
-    mostrarTela("telaTituloContagem");
-
-    setTimeout(() => {
-
+    const div =
         document
-            .getElementById("tituloContagem")
-            .focus();
+            .getElementById(
+                "historicoTratamentos"
+            );
 
-    }, 100);
+
+    if (
+        moduloAtual !== "tratamentos"
+    ) {
+
+        div.innerHTML = "";
+
+        return;
+    }
+
+
+    if (
+        historicoContagens.length === 0
+    ) {
+
+        div.innerHTML = "";
+
+        return;
+    }
+
+
+    let html =
+        `<h3>Histórico das contagens</h3>`;
+
+
+    historicoContagens.forEach(
+        (contagem, index) => {
+
+            html += `
+
+                <div class="historico-item">
+
+                    <div class="historico-titulo">
+
+                        ${index + 1}.
+                        ${escaparHTML(
+                            contagem.titulo
+                        )}
+
+                    </div>
+
+
+                    <div class="linha">
+                        <span>Q1</span>
+                        <strong>
+                            ${contagem.q1}
+                        </strong>
+                    </div>
+
+
+                    <div class="linha">
+                        <span>Q2</span>
+                        <strong>
+                            ${contagem.q2}
+                        </strong>
+                    </div>
+
+
+                    <div class="linha">
+                        <span>Q3</span>
+                        <strong>
+                            ${contagem.q3}
+                        </strong>
+                    </div>
+
+
+                    <div class="linha">
+                        <span>Q4</span>
+                        <strong>
+                            ${contagem.q4}
+                        </strong>
+                    </div>
+
+
+                    <hr>
+
+
+                    <div class="linha">
+                        <span>Total</span>
+                        <strong>
+                            ${contagem.total}
+                        </strong>
+                    </div>
+
+
+                    <div class="linha">
+                        <span>Células/µL</span>
+
+                        <strong>
+                            ${formatarNumero(
+                                contagem
+                                    .celulasPorMicrolitro
+                            )}
+                        </strong>
+                    </div>
+
+
+                    <div class="linha">
+                        <span>Total de células</span>
+
+                        <strong>
+                            ${formatarNumero(
+                                contagem
+                                    .numeroTotalCelulas
+                            )}
+                        </strong>
+                    </div>
+
+                </div>
+
+            `;
+        }
+    );
+
+
+    div.innerHTML = html;
 }
 
 
-/* =========================================================
+/* =====================================================
+   NOVA CONTAGEM DE TRATAMENTOS
+===================================================== */
+
+function novaContagemTratamento() {
+
+    if (
+        moduloAtual !== "tratamentos"
+    ) {
+
+        return;
+    }
+
+
+    tituloContagemAtual = "";
+
+
+    iniciarNovaContagem();
+}
+
+
+/* =====================================================
    SALVAR EXPERIMENTO
-========================================================= */
+===================================================== */
 
 async function salvarExperimento() {
 
     if (!usuarioAtual) {
 
-        alert("Usuário não identificado.");
+        alert(
+            "Usuário não identificado."
+        );
 
         return;
     }
@@ -1192,16 +1833,21 @@ async function salvarExperimento() {
 
     if (!resultadoAtual) {
 
-        alert("Nenhuma contagem para salvar.");
+        alert(
+            "Nenhuma contagem para salvar."
+        );
 
         return;
     }
 
 
     /*
-        Para Tratamentos:
-        salva TODAS as contagens no JSONB.
-    */
+     * Tratamentos:
+     * salva todas as condições.
+     *
+     * Outros módulos:
+     * salva apenas a contagem realizada.
+     */
 
     const historicoSalvar =
         moduloAtual === "tratamentos"
@@ -1214,56 +1860,79 @@ async function salvarExperimento() {
         user_id:
             usuarioAtual.id,
 
+
         nome_experimento:
             nomeExperimento,
+
 
         volume_suspensao:
             volumeSuspensao,
 
+
         fator_diluicao:
             fatorDiluicao,
+
 
         q1:
             resultadoAtual.q1,
 
+
         q2:
             resultadoAtual.q2,
+
 
         q3:
             resultadoAtual.q3,
 
+
         q4:
             resultadoAtual.q4,
+
 
         total_celulas:
             resultadoAtual.numeroTotalCelulas,
 
+
         tipo_experimento:
             moduloAtual,
+
 
         relacao_volume:
             relacaoVolume,
 
+
         numero_quadrantes:
             numeroQuadrantes,
+
 
         historico_contagens:
             historicoSalvar,
 
+
         numero_pocos:
-            dadosPlaqueamento?.numeroPocos || null,
+            dadosPlaqueamento
+                ?.numeroPocos || null,
+
 
         celulas_por_poco:
-            dadosPlaqueamento?.celulasPorPoco || null,
+            dadosPlaqueamento
+                ?.celulasPorPoco || null,
+
 
         volume_poco:
-            dadosPlaqueamento?.volumePoco || null,
+            dadosPlaqueamento
+                ?.volumePoco || null,
+
 
         volume_suspensao_por_poco:
-            dadosPlaqueamento?.volumeSuspensaoPorPoco || null,
+            dadosPlaqueamento
+                ?.volumeSuspensaoPorPoco || null,
+
 
         volume_meio_por_poco:
-            dadosPlaqueamento?.volumeMeioPorPoco || null
+            dadosPlaqueamento
+                ?.volumeMeioPorPoco || null
+
     };
 
 
@@ -1271,12 +1940,8 @@ async function salvarExperimento() {
 
 
     /*
-        Se ainda não existe ID:
-        cria o experimento.
-
-        Se já existe:
-        atualiza o mesmo experimento.
-    */
+     * PRIMEIRO SALVAMENTO
+     */
 
     if (!experimentoSalvoId) {
 
@@ -1288,35 +1953,50 @@ async function salvarExperimento() {
 
     }
 
+
+    /*
+     * SALVAMENTOS SEGUINTES
+     * Atualiza o mesmo experimento.
+     */
+
     else {
 
         resposta =
             await supabaseClient
                 .from("experimentos")
                 .update(dados)
-                .eq("id", experimentoSalvoId)
-                .eq("user_id", usuarioAtual.id)
+                .eq(
+                    "id",
+                    experimentoSalvoId
+                )
+                .eq(
+                    "user_id",
+                    usuarioAtual.id
+                )
                 .select();
     }
 
 
     if (resposta.error) {
 
-        console.error(resposta.error);
+        console.error(
+            resposta.error
+        );
+
 
         alert(
             "Erro ao salvar o experimento:\n\n" +
             resposta.error.message
         );
 
+
         return;
     }
 
 
     /*
-        Guarda o ID criado para que as próximas
-        contagens atualizem o mesmo experimento.
-    */
+     * Guarda o ID criado pelo primeiro INSERT.
+     */
 
     if (
         !experimentoSalvoId &&
@@ -1329,15 +2009,18 @@ async function salvarExperimento() {
     }
 
 
-    alert("Experimento salvo com sucesso!");
+    alert(
+        "Experimento salvo com sucesso!"
+    );
+
 
     carregarExperimentos();
 }
 
 
-/* =========================================================
+/* =====================================================
    CARREGAR EXPERIMENTOS
-========================================================= */
+===================================================== */
 
 async function carregarExperimentos() {
 
@@ -1351,34 +2034,57 @@ async function carregarExperimentos() {
         await supabaseClient
             .from("experimentos")
             .select("*")
-            .eq("user_id", usuarioAtual.id)
-            .order("created_at", {
-                ascending: false
-            });
+            .eq(
+                "user_id",
+                usuarioAtual.id
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
 
 
     const lista =
-        document.getElementById("listaExperimentos");
+        document
+            .getElementById(
+                "listaExperimentos"
+            );
 
 
     if (error) {
 
-        lista.innerHTML =
-            `<div class="mensagem">
+        lista.innerHTML = `
+
+            <div class="mensagem">
+
                 Erro ao carregar experimentos:
-                ${escaparHTML(error.message)}
-            </div>`;
+
+                ${escaparHTML(
+                    error.message
+                )}
+
+            </div>
+
+        `;
 
         return;
     }
 
 
-    if (!data || data.length === 0) {
+    if (
+        !data ||
+        data.length === 0
+    ) {
 
-        lista.innerHTML =
-            `<p class="texto-ajuda">
+        lista.innerHTML = `
+
+            <p class="texto-ajuda">
                 Nenhum experimento salvo.
-            </p>`;
+            </p>
+
+        `;
 
         return;
     }
@@ -1387,126 +2093,202 @@ async function carregarExperimentos() {
     lista.innerHTML = "";
 
 
-    data.forEach(experimento => {
+    data.forEach(
+        experimento => {
 
-        const div =
-            document.createElement("div");
-
-        div.className = "historico-item";
-
-
-        let modulo =
-            experimento.tipo_experimento ||
-            "Plaquear";
+            const div =
+                document.createElement(
+                    "div"
+                );
 
 
-        let textoModulo =
-            modulo;
+            div.className =
+                "historico-item";
 
 
-        if (modulo === "tratamentos") {
-
-            textoModulo = "Tratamentos";
-        }
-
-        else if (modulo === "primaria") {
-
-            textoModulo = "Cultura Primária";
-        }
-
-        else if (modulo === "plaquear") {
-
-            textoModulo = "Plaquear";
-        }
+            let modulo =
+                experimento
+                    .tipo_experimento ||
+                "plaquear";
 
 
-        div.innerHTML = `
+            let textoModulo =
+                modulo;
 
-            <div class="historico-titulo">
-                ${escaparHTML(experimento.nome_experimento)}
-            </div>
 
-            <div class="linha">
-                <span>Módulo</span>
-                <strong>
-                    ${escaparHTML(textoModulo)}
-                </strong>
-            </div>
+            if (
+                modulo ===
+                "tratamentos"
+            ) {
 
-            <div class="linha">
-                <span>Total de células</span>
-                <strong>
-                    ${formatarNumero(experimento.total_celulas)}
-                </strong>
-            </div>
+                textoModulo =
+                    "Tratamentos";
 
-            ${
-                modulo === "tratamentos"
-                ? `
-                    <div style="margin-top:10px;">
-                        <strong>
-                            ${
-                                Array.isArray(experimento.historico_contagens)
-                                ? experimento.historico_contagens.length
-                                : 0
-                            }
-                            contagem(ns)
-                        </strong>
-                    </div>
-                `
-                : ""
             }
 
-            <div style="margin-top:12px;">
+            else if (
+                modulo ===
+                "primaria"
+            ) {
 
-                <button
-                    class="secondary"
-                    onclick='abrirExperimento(${JSON.stringify(experimento)})'
-                >
-                    ABRIR
-                </button>
+                textoModulo =
+                    "Cultura Primária";
 
-                <button
-                    class="danger"
-                    onclick="excluirExperimento('${experimento.id}')"
-                >
-                    EXCLUIR
-                </button>
+            }
 
-            </div>
-        `;
+            else {
+
+                textoModulo =
+                    "Plaquear";
+            }
 
 
-        lista.appendChild(div);
-    });
+            let quantidadeContagens = 0;
+
+
+            if (
+                modulo === "tratamentos" &&
+                Array.isArray(
+                    experimento
+                        .historico_contagens
+                )
+            ) {
+
+                quantidadeContagens =
+                    experimento
+                        .historico_contagens
+                        .length;
+            }
+
+
+            div.innerHTML = `
+
+                <div class="historico-titulo">
+
+                    ${escaparHTML(
+                        experimento
+                            .nome_experimento
+                    )}
+
+                </div>
+
+
+                <div class="linha">
+
+                    <span>Módulo</span>
+
+                    <strong>
+                        ${textoModulo}
+                    </strong>
+
+                </div>
+
+
+                <div class="linha">
+
+                    <span>
+                        Total de células
+                    </span>
+
+                    <strong>
+                        ${formatarNumero(
+                            experimento
+                                .total_celulas
+                        )}
+                    </strong>
+
+                </div>
+
+
+                ${
+                    modulo === "tratamentos"
+                    ? `
+                        <div class="linha">
+
+                            <span>
+                                Contagens
+                            </span>
+
+                            <strong>
+                                ${quantidadeContagens}
+                            </strong>
+
+                        </div>
+                    `
+                    : ""
+                }
+
+
+                <div style="margin-top:12px;">
+
+                    <button
+                        class="secondary"
+                        onclick='abrirExperimento(${JSON.stringify(experimento)})'
+                    >
+                        ABRIR
+                    </button>
+
+
+                    <button
+                        class="danger"
+                        onclick="excluirExperimento('${experimento.id}')"
+                    >
+                        EXCLUIR
+                    </button>
+
+                </div>
+
+            `;
+
+
+            lista.appendChild(div);
+        }
+    );
 }
 
 
-/* =========================================================
+/* =====================================================
    ABRIR EXPERIMENTO
-========================================================= */
+===================================================== */
 
-function abrirExperimento(experimento) {
+function abrirExperimento(
+    experimento
+) {
 
     nomeExperimento =
-        experimento.nome_experimento || "";
+        experimento
+            .nome_experimento || "";
+
 
     volumeSuspensao =
-        parseFloat(experimento.volume_suspensao) || 0;
+        parseFloat(
+            experimento
+                .volume_suspensao
+        ) || 0;
+
 
     fatorDiluicao =
-        parseFloat(experimento.fator_diluicao) || 1;
+        parseFloat(
+            experimento
+                .fator_diluicao
+        ) || 1;
+
 
     experimentoSalvoId =
         experimento.id;
 
 
     moduloAtual =
-        experimento.tipo_experimento || "plaquear";
+        experimento
+            .tipo_experimento ||
+        "plaquear";
 
 
     relacaoVolume =
-        parseFloat(experimento.relacao_volume) ||
+        parseFloat(
+            experimento
+                .relacao_volume
+        ) ||
         (
             moduloAtual === "primaria"
                 ? 0.1
@@ -1515,7 +2297,10 @@ function abrirExperimento(experimento) {
 
 
     numeroQuadrantes =
-        parseInt(experimento.numero_quadrantes) ||
+        parseInt(
+            experimento
+                .numero_quadrantes
+        ) ||
         (
             moduloAtual === "primaria"
                 ? 1
@@ -1523,17 +2308,29 @@ function abrirExperimento(experimento) {
         );
 
 
-    if (moduloAtual === "tratamentos") {
+    /* =========================
+       TRATAMENTOS
+    ========================= */
 
-        nomeModulo = "Tratamentos";
+    if (
+        moduloAtual === "tratamentos"
+    ) {
+
+        nomeModulo =
+            "Tratamentos";
 
 
         if (
-            Array.isArray(experimento.historico_contagens)
+            Array.isArray(
+                experimento
+                    .historico_contagens
+            )
         ) {
 
             historicoContagens =
-                experimento.historico_contagens;
+                experimento
+                    .historico_contagens;
+
         }
 
         else {
@@ -1542,31 +2339,45 @@ function abrirExperimento(experimento) {
         }
 
 
-        if (historicoContagens.length > 0) {
+        if (
+            historicoContagens.length > 0
+        ) {
 
             resultadoAtual =
                 historicoContagens[
                     historicoContagens.length - 1
                 ];
+
         }
 
         else {
 
             resultadoAtual = {
 
-                q1: experimento.q1 || 0,
-                q2: experimento.q2 || 0,
-                q3: experimento.q3 || 0,
-                q4: experimento.q4 || 0,
+                titulo: "",
+
+                q1:
+                    experimento.q1 || 0,
+
+                q2:
+                    experimento.q2 || 0,
+
+                q3:
+                    experimento.q3 || 0,
+
+                q4:
+                    experimento.q4 || 0,
 
                 total: 0,
 
                 celulasPorMicrolitro: 0,
 
                 numeroTotalCelulas:
-                    experimento.total_celulas || 0
+                    experimento
+                        .total_celulas || 0
             };
         }
+
 
         mostrarResultado();
 
@@ -1574,42 +2385,86 @@ function abrirExperimento(experimento) {
     }
 
 
-    if (moduloAtual === "primaria") {
+    /* =========================
+       CULTURA PRIMÁRIA
+    ========================= */
 
-        nomeModulo = "Cultura Primária";
+    if (
+        moduloAtual === "primaria"
+    ) {
+
+        nomeModulo =
+            "Cultura Primária";
     }
+
+
+    /* =========================
+       PLAQUEAR
+    ========================= */
 
     else {
 
-        nomeModulo = "Plaquear";
+        nomeModulo =
+            "Plaquear";
     }
+
+
+    const q1 =
+        experimento.q1 || 0;
+
+    const q2 =
+        experimento.q2 || 0;
+
+    const q3 =
+        experimento.q3 || 0;
+
+    const q4 =
+        experimento.q4 || 0;
+
+
+    const total =
+        q1 + q2 + q3 + q4;
+
+
+    const celulasPorMicrolitro =
+        (
+            total /
+            relacaoVolume
+        ) *
+        fatorDiluicao;
 
 
     resultadoAtual = {
 
-        q1: experimento.q1 || 0,
+        titulo:
+            nomeModulo,
 
-        q2: experimento.q2 || null,
+        q1: q1,
 
-        q3: experimento.q3 || null,
+        q2:
+            numeroQuadrantes >= 2
+                ? q2
+                : null,
 
-        q4: experimento.q4 || null,
+        q3:
+            numeroQuadrantes >= 3
+                ? q3
+                : null,
+
+        q4:
+            numeroQuadrantes >= 4
+                ? q4
+                : null,
 
         total:
-            (
-                (experimento.q1 || 0) +
-                (experimento.q2 || 0) +
-                (experimento.q3 || 0) +
-                (experimento.q4 || 0)
-            ),
+            total,
 
         celulasPorMicrolitro:
-            (
-                experimento.total_celulas || 0
-            ) / volumeSuspensao,
+            celulasPorMicrolitro,
 
         numeroTotalCelulas:
-            experimento.total_celulas || 0
+            experimento
+                .total_celulas || 0
     };
 
 
@@ -1617,9 +2472,9 @@ function abrirExperimento(experimento) {
 }
 
 
-/* =========================================================
+/* =====================================================
    EXCLUIR EXPERIMENTO
-========================================================= */
+===================================================== */
 
 async function excluirExperimento(id) {
 
@@ -1627,6 +2482,7 @@ async function excluirExperimento(id) {
         confirm(
             "Tem certeza que deseja excluir este experimento?"
         );
+
 
     if (!confirmar) {
 
@@ -1638,8 +2494,14 @@ async function excluirExperimento(id) {
         await supabaseClient
             .from("experimentos")
             .delete()
-            .eq("id", id)
-            .eq("user_id", usuarioAtual.id);
+            .eq(
+                "id",
+                id
+            )
+            .eq(
+                "user_id",
+                usuarioAtual.id
+            );
 
 
     if (error) {
@@ -1657,20 +2519,24 @@ async function excluirExperimento(id) {
 }
 
 
-/* =========================================================
+/* =====================================================
    NOVO EXPERIMENTO
-========================================================= */
+===================================================== */
 
 function novoExperimento() {
 
     nomeExperimento = "";
+
     volumeSuspensao = 0;
+
     fatorDiluicao = 1;
 
     moduloAtual = null;
+
     nomeModulo = "";
 
     quadrantes = [];
+
     quadranteAtual = 0;
 
     historicoContagens = [];
@@ -1684,34 +2550,73 @@ function novoExperimento() {
     tituloContagemAtual = "";
 
 
-    document.getElementById("nomeExperimento").value = "";
-    document.getElementById("volumeSuspensao").value = "";
-    document.getElementById("fatorDiluicao").value = "1";
+    document
+        .getElementById(
+            "nomeExperimento"
+        )
+        .value = "";
 
 
-    mostrarTela("telaInicial");
+    document
+        .getElementById(
+            "volumeSuspensao"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "fatorDiluicao"
+        )
+        .value = "1";
+
+
+    document
+        .getElementById(
+            "tituloContagem"
+        )
+        .value = "";
+
+
+    mostrarTela(
+        "telaInicial"
+    );
 }
 
 
-/* =========================================================
+/* =====================================================
    CALCULADORA DE PLAQUEAMENTO
-========================================================= */
+===================================================== */
 
 function calcularPlaqueamento() {
 
     const numeroPocos =
         parseFloat(
-            document.getElementById("numeroPocos").value
+            document
+                .getElementById(
+                    "numeroPocos"
+                )
+                .value
         );
+
 
     const celulasPorPoco =
         parseFloat(
-            document.getElementById("celulasPorPoco").value
+            document
+                .getElementById(
+                    "celulasPorPoco"
+                )
+                .value
         );
+
 
     const volumePoco =
         parseFloat(
-            document.getElementById("volumePoco").value
+            document
+                .getElementById(
+                    "volumePoco"
+                )
+                .value
         );
 
 
@@ -1730,7 +2635,8 @@ function calcularPlaqueamento() {
 
 
     const celulasPorMicrolitro =
-        resultadoAtual.celulasPorMicrolitro;
+        resultadoAtual
+            .celulasPorMicrolitro;
 
 
     const volumeSuspensaoPorPoco =
@@ -1738,7 +2644,8 @@ function calcularPlaqueamento() {
         celulasPorMicrolitro;
 
 
-    let volumeMeioPorPoco = null;
+    let volumeMeioPorPoco =
+        null;
 
 
     if (volumePoco) {
@@ -1765,6 +2672,7 @@ function calcularPlaqueamento() {
 
         volumeMeioPorPoco:
             volumeMeioPorPoco
+
     };
 
 
@@ -1773,25 +2681,49 @@ function calcularPlaqueamento() {
         <div class="resultado">
 
             <div class="linha">
-                <span>Poços</span>
-                <strong>${numeroPocos}</strong>
+
+                <span>
+                    Poços
+                </span>
+
+                <strong>
+                    ${numeroPocos}
+                </strong>
+
             </div>
 
+
             <div class="linha">
-                <span>Células/poço</span>
+
+                <span>
+                    Células/poço
+                </span>
+
                 <strong>
-                    ${formatarNumero(celulasPorPoco)}
+                    ${formatarNumero(
+                        celulasPorPoco
+                    )}
                 </strong>
+
             </div>
+
 
             <hr>
 
+
             <div class="linha">
-                <span>Suspensão por poço</span>
+
+                <span>
+                    Suspensão por poço
+                </span>
+
                 <strong>
-                    ${formatarNumero(volumeSuspensaoPorPoco)}
+                    ${formatarNumero(
+                        volumeSuspensaoPorPoco
+                    )}
                     µL
                 </strong>
+
             </div>
 
     `;
@@ -1802,31 +2734,44 @@ function calcularPlaqueamento() {
         html += `
 
             <div class="linha">
-                <span>Meio por poço</span>
+
+                <span>
+                    Meio por poço
+                </span>
+
                 <strong>
-                    ${formatarNumero(volumeMeioPorPoco)}
+                    ${formatarNumero(
+                        volumeMeioPorPoco
+                    )}
                     µL
                 </strong>
+
             </div>
 
         `;
     }
 
 
-    html += `</div>`;
+    html += `
+        </div>
+    `;
 
 
-    document.getElementById(
-        "resultadoPlaqueamento"
-    ).innerHTML = html;
+    document
+        .getElementById(
+            "resultadoPlaqueamento"
+        )
+        .innerHTML = html;
 }
 
 
-/* =========================================================
-   UTILIDADES
-========================================================= */
+/* =====================================================
+   FORMATAÇÃO
+===================================================== */
 
-function formatarNumero(numero) {
+function formatarNumero(
+    numero
+) {
 
     if (
         numero === null ||
@@ -1838,48 +2783,77 @@ function formatarNumero(numero) {
     }
 
 
-    return Number(numero).toLocaleString(
-        "pt-BR",
-        {
-            maximumFractionDigits: 4
-        }
-    );
+    return Number(numero)
+        .toLocaleString(
+            "pt-BR",
+            {
+                maximumFractionDigits: 4
+            }
+        );
 }
 
 
-function escaparHTML(texto) {
+function escaparHTML(
+    texto
+) {
 
-    if (texto === null || texto === undefined) {
+    if (
+        texto === null ||
+        texto === undefined
+    ) {
 
         return "";
     }
 
 
     return String(texto)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 }
 
 
-/* =========================================================
-   INICIAR
-========================================================= */
+/* =====================================================
+   VERIFICAR SESSÃO
+===================================================== */
 
 async function verificarSessao() {
 
     const { data } =
-        await supabaseClient.auth.getSession();
+        await supabaseClient
+            .auth
+            .getSession();
 
 
-    if (data.session) {
+    if (
+        data.session
+    ) {
 
         usuarioAtual =
             data.session.user;
 
-        mostrarTela("telaInicial");
+
+        mostrarTela(
+            "telaInicial"
+        );
+
 
         carregarExperimentos();
 
@@ -1887,7 +2861,9 @@ async function verificarSessao() {
 
     else {
 
-        mostrarTela("telaLogin");
+        mostrarTela(
+            "telaLogin"
+        );
     }
 }
 
